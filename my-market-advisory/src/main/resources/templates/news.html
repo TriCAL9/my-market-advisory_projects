@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:each="stockProfile : ${stockProfile}" th:text="${stockProfile.getCompanyName()}"> Recent Headlines</title>
+    <link dir="auto" href="css/flex-news.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<section>
+    <div>
+        <h3 th:text="${stockProfile.getSymbol()}"></h3>
+        <p th:text="${stockProfile.getDescription()}"></p>
+    </div>
+    <div th:each="latestNews : ${latestNews}">
+        <h4 th:text="${latestNews.getHeadline()}">Wished I worked here.</h4>
+        <h5 th:text="${latestNews.getSource()}">Symbol and Price</h5>
+        <p th:text="${latestNews.getSummary()}"> Summary </p>
+        <a th:href="@{${latestNews.getUrl()}}"> <img class="news-article-img" th:src="@{${latestNews.getImage()}}"
+                                                     width="100px"></a>
+    </div>
+</section>
+
+</body>
+</html>
