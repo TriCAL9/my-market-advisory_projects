@@ -1,0 +1,85 @@
+   plugins {
+        id 'java'
+        id 'org.unbroken-dome.test-sets' version '3.0.1'
+    }
+
+apply plugin: 'java'
+
+version = '0.1.1-SNAPSHOT'
+
+ext {
+    springFrameworkVersion = '5.1.5.RELEASE'
+    jacksonVersion = '2.9.9'
+    testNgVersion = '6.14.3'
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenLocal()
+        mavenCentral()
+
+    }
+}
+subprojects {
+    version = '0.2.0-SNAPSHOT'
+}
+    
+
+configure(subprojects.findAll{it.name == 'my-market-advisory' || 'market-recommender'}) {
+     repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+    }
+       
+    apply plugin: 'java'
+    testSets {
+        integrationTest { dirName = "integration-test" }
+    }
+
+    java {
+        sourceCompatibility =  'VERSION_11'
+        targetCompatibility =  'VERSION_11'
+    }
+    
+    sourceSets {
+        integrationTest {
+            java {
+                compileClasspath += sourceSets.main.output
+                runtimeClasspath += sourceSets.main.output
+                srcDir file('src/integration-test/java')
+            }
+            resources.srcDir file('src/integration-test/resources')
+        }
+    }
+
+    configurations{
+        integrationTestImplementation.extendsFrom testImplementation
+        integrationTestRuntimeOnly.extendsFrom runtimeOnly
+    }
+    
+    dependencies {
+        testImplementation "org.testng:testng:$testNgVersion"
+        integrationTestImplementation ('org.mockito:mockito-core:2.+')
+        integrationTestImplementation('org.mockito:mockito-junit-jupiter:2.18.3')
+    }
+    
+    task integrationTest (type: Test) {
+        description = 'Runs integration tests.'
+        group = 'verification'
+
+        testClassesDirs = sourceSets.integrationTest.output.classesDirs
+        classpath = sourceSets.integrationTest.runtimeClasspath
+        useTestNG()
+        shouldRunAfter test  
+    }
+    check.dependsOn integrationTest
+
+    reporting.baseDir = "my-reports"
+    testResultsDirName = "$buildDir/my-test-results"
+
+    test {
+        useTestNG()
+    }
+}
