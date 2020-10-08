@@ -1,0 +1,13 @@
+plugins{
+    id 'java'
+}
+dependencies {
+    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE')
+    compile project(':market-recommender-commons')
+    compile project(':market-recommender-jpa')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group = 'market-recommender'
+version = '0.1.1-SNAPSHOT'
+
+
+dependencies {
+    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE')
+    implementation 'org.springframework.data:spring-data-commons'
+    implementation 'org.springframework:spring-tx'
+    implementation 'org.springframework:spring-beans'
+
+
+    runtimeOnly 'mysql:mysql-connector-java'
+
+}
+
+test {
+    useJUnitPlatform()
+}

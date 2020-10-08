@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.myrecommender.data.model;
+package api.recommender.jpa.model;
 
 import lombok.*;
 
@@ -13,10 +13,13 @@ import lombok.*;
 @Data
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-public class Member {
+public class Trade_Receipt {
     @NonNull
-    Integer Member_id;
-    String Member_First_Name;
-    String Member_Last_Name;
-    String Member_Recomm_Sub_Name;
+    String Trade_Owner;
+    String Trade_Price;
+    String Trade_Type;
+    String Trade_Opening_Date;
+    String Trade_Closing_Date;
+    String Trade_Strategy_Name;
+    String Trade_Transaction_Symbol;
 }

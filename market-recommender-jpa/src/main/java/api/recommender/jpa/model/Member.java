@@ -3,25 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.myrecommender.data.model;
+package api.recommender.jpa.model;
 
 import lombok.*;
-
-import java.sql.Date;
 
 /**
  * @author CalAF
  */
+@Data
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-@Data
-public class Market {
+public class Member {
     @NonNull
-    Date Market_Transaction_Date;
-    @NonNull
-    String Market_Portfolio_Name;
-    String Market_Technical_Condition;
-    String Market_Asset_Type;
-
-
+    Integer Member_id;
+    String Member_First_Name;
+    String Member_Last_Name;
+    String Member_Recomm_Sub_Name;
 }

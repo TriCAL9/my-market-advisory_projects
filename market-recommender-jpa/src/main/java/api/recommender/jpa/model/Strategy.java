@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.myrecommender.data.model;
+package api.recommender.jpa.model;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author CalAF
@@ -13,9 +16,10 @@ import lombok.*;
 @Data
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-public class Symbol {
-    @NonNull
-    String Symbol_Type;
-    String Symbol_Rating;
-    String Symbol_Sign;
+public class Strategy {
+
+    String Strategy_Name;
+    String Strategy_Researcher;
+    String Strategy_Summary;
+    String Strategy_Source_URL;
 }

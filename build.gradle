@@ -1,7 +1,6 @@
-   plugins {
-        id 'java'
-        id 'org.unbroken-dome.test-sets' version '3.0.1'
-    }
+plugins {
+    id 'java'
+}
 
 apply plugin: 'java'
 
@@ -21,9 +20,12 @@ allprojects {
 
     }
 }
+
 subprojects {
     version = '0.2.0-SNAPSHOT'
 }
+
+
     
 
 configure(subprojects.findAll{it.name == 'my-market-advisory' || 'market-recommender'}) {
@@ -32,11 +34,8 @@ configure(subprojects.findAll{it.name == 'my-market-advisory' || 'market-recomme
         maven { url 'https://repo.spring.io/milestone' }
         maven { url 'https://repo.spring.io/snapshot' }
     }
-       
+
     apply plugin: 'java'
-    testSets {
-        integrationTest { dirName = "integration-test" }
-    }
 
     java {
         sourceCompatibility =  'VERSION_11'
@@ -61,6 +60,10 @@ configure(subprojects.findAll{it.name == 'my-market-advisory' || 'market-recomme
     
     dependencies {
         testImplementation "org.testng:testng:$testNgVersion"
+
+        integrationTestImplementation 'org.junit.jupiter:junit-jupiter-params:5.2.0'
+        integrationTestRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+
         integrationTestImplementation ('org.mockito:mockito-core:2.+')
         integrationTestImplementation('org.mockito:mockito-junit-jupiter:2.18.3')
     }
