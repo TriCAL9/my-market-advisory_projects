@@ -12,6 +12,7 @@ gradle/wrapper/gradle-wrapper.jar
 **/my-reports/
 **/src/main/resources/application.properties
 **/src/test/resources/application.properties
+**/src/integration-test/resources/application.properties
 
 ### STS ###
 .apt_generated

@@ -3,25 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.recommender.jpa.model;
+package com.unknown.jpa.model;
 
+import com.unknown.commons.base.data.BaseSymbol;
+import com.unknown.commons.implemented.Asset;
 import lombok.*;
 
-import java.sql.Date;
+import javax.persistence.Id;
 
 /**
  * @author CalAF
  */
+@Data
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-@Data
-public class Market {
+public class Symbol implements BaseSymbol {
+    @Id
     @NonNull
-    Date Market_Transaction_Date;
-    @NonNull
-    String Market_Portfolio_Name;
-    String Market_Technical_Condition;
-    String Market_Asset_Type;
-
-
+    Asset Symbol_Type;
+    String Symbol_Rating;
+    String Symbol_Sign;
 }

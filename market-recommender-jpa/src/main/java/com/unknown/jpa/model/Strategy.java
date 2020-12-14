@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.recommender.jpa.model;
+package com.unknown.jpa.model;
 
+import com.unknown.commons.base.data.BaseStrategy;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Data
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-public class Strategy {
+public class Strategy implements BaseStrategy {
 
     String Strategy_Name;
     String Strategy_Researcher;

@@ -12,6 +12,9 @@ dependencies {
     implementation 'org.springframework:spring-tx'
     implementation 'org.springframework:spring-beans'
 
+    compileOnly 'org.projectlombok:lombok:1.18.14'
+    annotationProcessor 'org.projectlombok:lombok:1.18.14'
+
 
     runtimeOnly 'mysql:mysql-connector-java'
 
