@@ -1,12 +1,10 @@
 package com.unknown.commons.base.data;
 
-import com.unknown.commons.implemented.Email;
-
 public interface BaseMember<ID> {
 
-    Email getMember_id();
+    ID getMember_id();
 
-    void setMember_id(Email Member_id);
+    void setMember_id(ID Member_id);
 
     String getMember_First_Name();
 
