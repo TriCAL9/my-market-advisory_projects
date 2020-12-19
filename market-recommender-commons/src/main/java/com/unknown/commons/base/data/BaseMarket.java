@@ -2,7 +2,7 @@ package com.unknown.commons.base.data;
 
 import com.unknown.commons.implemented.Asset;
 
-public interface BaseMarket<ID> {
+public interface BaseMarket<T extends BaseMember<Integer>, ID> {
     ID getMarket_Transaction_Date();
 
     void setMarket_Transaction_Date(ID Market_Transaction_Date);
