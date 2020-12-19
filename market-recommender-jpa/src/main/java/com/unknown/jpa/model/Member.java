@@ -6,7 +6,6 @@
 package com.unknown.jpa.model;
 
 import com.unknown.commons.base.data.BaseMember;
-import com.unknown.commons.implemented.Email;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -17,9 +16,9 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-public class Member implements BaseMember<Email> {
+public class Member implements BaseMember<Integer> {
     @Id
-    Email Member_id;
+    Integer Member_id;
     String Member_First_Name;
     String Member_Last_Name;
     String Member_Recomm_Sub_Name;
