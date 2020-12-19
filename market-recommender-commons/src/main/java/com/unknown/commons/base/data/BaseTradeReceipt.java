@@ -1,6 +1,8 @@
 package com.unknown.commons.base.data;
 
-public interface BaseTradeReceipt<ID> {
+import java.sql.Date;
+
+public interface BaseTradeReceipt<T extends BaseMarket<BaseMember<Integer>, ID>, ID> {
     String getTrade_Owner();
 
     void setTrade_Owner(String Trade_Owner);
@@ -13,13 +15,13 @@ public interface BaseTradeReceipt<ID> {
 
     void setTrade_Type(String Trade_Type);
 
-    String getTrade_Opening_Date();
+    Date getTrade_Opening_Date();
 
-    void setTrade_Opening_Date(String Trade_Opening_Date);
+    void setTrade_Opening_Date(Date Trade_Opening_Date);
 
-    String getTrade_Closing_Date();
+    Date getTrade_Closing_Date();
 
-    void setTrade_Closing_Date(String Trade_Closing_Date);
+    void setTrade_Closing_Date(Date Trade_Closing_Date);
 
     String getTrade_Strategy_Name();
 
