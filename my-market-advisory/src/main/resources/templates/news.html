@@ -11,7 +11,11 @@
 <section>
     <div>
         <h3 th:text="${stockProfile.getSymbol()}"></h3>
-        <p th:text="${stockProfile.getDescription()}"></p>
+        <div th:each="stockProfile : ${stockProfile}">
+            <p th:text="${stockProfile.getDescription()}"></p>
+            <p th:text="${stockProfile.getExchange()}"></p>
+            <p th:text="${stockProfile.getWebsite()}"></p>
+        </div>
     </div>
     <div th:each="latestNews : ${latestNews}">
         <h4 th:text="${latestNews.getHeadline()}">Wished I worked here.</h4>

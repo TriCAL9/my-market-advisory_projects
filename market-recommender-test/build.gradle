@@ -1,13 +1,30 @@
 plugins{
-    id 'java'
+    id 'org.springframework.boot' version "2.4.0-SNAPSHOT" apply false
 }
-dependencies {
-    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE')
-    compile project(':market-recommender-commons')
-    compile project(':market-recommender-jpa')
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+apply plugin: 'io.spring.dependency-management'
+
+configurations {
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+}
+
+
+dependencies {
+    implementation 'org.springframework.data:spring-data-commons'
+
+    integrationTestImplementation 'org.mockito:mockito-core:2.+'
+    integrationTestImplementation'org.mockito:mockito-junit-jupiter:2.18.3'
+
+    compile project(':market-recommender-commons')
+
+    compile 'org.springframework.boot:spring-boot-starter-test'
+
+    compile "org.testng:testng:$testNgVersion"
 }
 test {
-    useJUnitPlatform()
+    useTestNG()
 }

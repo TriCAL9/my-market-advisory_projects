@@ -1,0 +1,36 @@
+plugins{
+    id 'org.springframework.boot' version "2.4.0-SNAPSHOT" apply false
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+configurations.create("developmentOnly")
+
+configurations {
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+    developmentOnly.extendsFrom(runtimeOnly)
+}
+
+dependencies {
+    implementation('mysql:mysql-connector-java:8.0.22')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:2.4.1'
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    compile project(':market-recommender-commons')
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok:1.+'
+
+    testCompile project(':market-recommender-test')
+
+    developmentOnly('org.springframework.boot:spring-boot-devtools')
+    integrationTestImplementation 'org.mockito:mockito-core:2.+'
+    integrationTestImplementation'org.mockito:mockito-junit-jupiter:2.18.3'
+}
+
+test {
+    useTestNG()
+}

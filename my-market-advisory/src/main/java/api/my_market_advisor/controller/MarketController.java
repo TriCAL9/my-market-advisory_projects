@@ -23,6 +23,8 @@ public class MarketController extends RestTemplate {
 
     @Value("${api.iex_cloud_url}")
     UriTemplate url;
+    @Value("${api.iex_cloud_company_url}")
+    UriTemplate companyUrl;
     @Value("${api.last}")
     UriTemplate last;
     @Value("${api.iex_cloud_key}")
@@ -68,8 +70,7 @@ public class MarketController extends RestTemplate {
     }
 
     private URI initializeURI(String symbol, String filter) {
-        return this.url
-                .expand(symbol, filter, "", iex_cloud_key);
+        return this.companyUrl.expand(symbol, filter, iex_cloud_key);
     }
 
 }

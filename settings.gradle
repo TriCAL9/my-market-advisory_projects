@@ -15,10 +15,9 @@ pluginManagement {
 
 
 rootProject.name = 'my-market-advisory_projects'
-
-include 'my-market-advisory'
 include 'market-recommender-commons'
-include 'market-recommender-jpa'
+include 'market-recommender-jdbc'
 include 'market-recommender-test'
+include 'my-market-advisory'
 
 

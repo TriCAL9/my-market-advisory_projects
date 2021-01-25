@@ -1,5 +1,14 @@
 plugins {
-    id 'java'
+    id 'org.springframework.boot' version "2.4.0-SNAPSHOT" apply false
+}
+
+apply plugin: 'io.spring.dependency-management'
+configurations {
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
 }
 
 group = 'market-recommender'
@@ -7,19 +16,10 @@ version = '0.1.1-SNAPSHOT'
 
 
 dependencies {
-    implementation enforcedPlatform('org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE')
-    implementation 'org.springframework.data:spring-data-commons'
     implementation 'org.springframework:spring-tx'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:2.4.2'
     implementation 'org.springframework:spring-beans'
 
     compileOnly 'org.projectlombok:lombok:1.18.14'
     annotationProcessor 'org.projectlombok:lombok:1.18.14'
-
-
-    runtimeOnly 'mysql:mysql-connector-java'
-
-}
-
-test {
-    useJUnitPlatform()
 }

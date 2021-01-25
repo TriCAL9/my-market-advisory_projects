@@ -2,8 +2,6 @@ package api.my_market_advisor.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Objects;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StockProfile extends MarketData {
 
@@ -11,12 +9,14 @@ public class StockProfile extends MarketData {
     private final String companyName;
     private final String description;
     private final String exchange;
+    private final String website;
 
     public StockProfile(Builder builder) {
         super(builder);
         this.companyName = builder.companyName;
         this.description = builder.description;
         this.exchange = builder.exchange;
+        this.website = builder.website;
     }
 
     public static String getPARAMETER() {
@@ -35,19 +35,21 @@ public class StockProfile extends MarketData {
         return exchange;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
     public static class Builder extends MarketData.Builder<Builder> {
         private final String companyName;
         private final String description;
-        private String exchange;
+        private final String exchange;
+        private final String website;
 
-        public Builder(String companyName, String description) {
+        public Builder(String companyName, String description, String exchange, String website) {
             this.companyName = companyName;
             this.description = description;
-        }
-
-        public Builder addExchange(String exchange) {
-            this.exchange = Objects.requireNonNull(exchange);
-            return this;
+            this.exchange = exchange;
+            this.website = website;
         }
 
         @Override
