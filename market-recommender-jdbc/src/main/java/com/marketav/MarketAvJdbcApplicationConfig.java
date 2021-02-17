@@ -1,25 +1,30 @@
 package com.marketav;
 
-
 import com.marketav.commons.implemented.WildCardConverter;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootConfiguration
-@EnableJdbcRepositories
-public class JDBCConfiguration extends AbstractJdbcConfiguration {
+@SpringBootApplication
+@EnableJpaRepositories
+@EntityScan
+public class MarketAvJdbcApplicationConfig {
+    public static void main(String[] args) {
+        SpringApplication.run(MarketAvJdbcApplicationConfig.class, args);
+    }
+
     @Bean
     WildCardConverter wildCardConverter() {
         return new WildCardConverter("%");
     }
 
     @Bean
-    @ConfigurationProperties("app.datasource")
+    @ConfigurationProperties(prefix = "app.datasource")
     public HikariDataSource dataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }

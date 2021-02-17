@@ -15,7 +15,7 @@ public abstract class BaseUserProfile2RepoTest<U extends BaseUserProfile2, ID ex
     @Autowired
     BaseUserProfile2Repo<U, ID> userProfile2Repo;
 
-    public abstract BaseUserProfile2 createUserProfile2(String email, LocalDate timeIn, LocalDate timeOut, boolean signedInStatus);
+    protected abstract BaseUserProfile2 createUserProfile2(String email, LocalDate timeIn, LocalDate timeOut, boolean signedInStatus);
 
     public void clearDatabase() {
         userProfile2Repo.deleteAll();
@@ -23,7 +23,7 @@ public abstract class BaseUserProfile2RepoTest<U extends BaseUserProfile2, ID ex
 
     @Test
     public void testOperation() {
-        assertEquals(userProfile2Repo, 0);
+        assertEquals(userProfile2Repo.count(), 0);
         BaseUserProfile2 userStamp = createUserProfile2("cartworld@shopping.com", LocalDate.now(), null, true);
         BaseUserProfile2 userStamp1 = createUserProfile2("lookatusbunch@outlook.com", LocalDate.now(), null, true);
     }

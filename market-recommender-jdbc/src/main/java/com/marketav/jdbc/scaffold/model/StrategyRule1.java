@@ -10,40 +10,51 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.Map;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @author CalAF
  */
 @Data
+@Access(AccessType.FIELD)
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
-@Table("Strategy_Rule1")
-public class StrategyRule1 implements BaseStrategyRule1<Integer> {
+@Table(name = "STRATEGY_RULE1")
+@Entity
+public class StrategyRule1 implements BaseStrategyRule1<Integer>, Serializable {
 
     @Id
     @NonNull
+    @Column(name = "Strategy_Id")
     Integer strategyId;
     @NonNull
+    @Column(name = "Strategy_Researcher")
     String strategyResearcher;
     @NonNull
+    @Column(name = "Strategy_Summary")
     String strategySummary;
     @NonNull
+    @Column(name = "Strategy_Source_URL")
     String strategySourceUrl;
     @NonNull
-    @Column("Member_Rating_Sub")
+    @Column(name = "Member_Rating_Sub")
     String memberRatingSub;
     @NonNull
-    @Column("Profile_Email")
+    @Column(name = "Profile_Email")
     String profileEmail;
     @NonNull
-    @Column("Member_Id")
+    @Column(name = "Member_Id")
     Integer memberId;
-    @MappedCollection(keyColumn = "Rnumber")
-    Map<Integer, StrategyRule2> strategyRule2Map;
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "Member_Rating_Sub", updatable = false, insertable = false, referencedColumnName = "Member_Rating_Sub"),
+            @JoinColumn(name = "Member_Id", updatable = false, insertable = false, referencedColumnName = "Member_Id"),
+            @JoinColumn(name = "Profile_Email", updatable = false, insertable = false, referencedColumnName = "Profile_Email")
+    })
+    RatingSubscription rating_subscription;
+    @OneToMany(mappedBy = "strategy_rule1")
+    Set<StrategyRule2> strategyRule2Map;
 }

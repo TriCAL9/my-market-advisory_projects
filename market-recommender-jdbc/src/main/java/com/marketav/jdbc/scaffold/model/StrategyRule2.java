@@ -6,34 +6,48 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseStrategyRule2;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.RequiredArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author CalAF
  */
 @Data
-@AllArgsConstructor(staticName = "of")
-@Table("Strategy_Rule2")
-public class StrategyRule2 implements BaseStrategyRule2<Integer> {
+@Access(AccessType.FIELD)
+@RequiredArgsConstructor(staticName = "of")
+@NoArgsConstructor
+@Table(name = "STRATEGY_RULE2")
+@Entity
+public class StrategyRule2 implements BaseStrategyRule2<Integer>, Serializable {
+
     @Id
     @NonNull
-    @Column("Rnumber")
+    @Column(name = "Rnumber")
     Integer rnumber;
+
     @NonNull
-    @Column("Technical_Indicator")
+    @Column(name = "Technical_Indicator")
     String technicalIndicator;
+
     @NonNull
-    @Column("Stage")
+    @Column(name = "Stage")
     String stage;
+
     @NonNull
-    @Column("Target")
-    Integer target;
+    @Column(name = "Target")
+    Double target;
+
     @NonNull
-    @Column("Strategy_Id")
+    @Column(name = "Strategy_Id")
     Integer strategyId;
+
+    @ManyToOne
+    @JoinColumn(name = "Strategy_Id", updatable = false, insertable = false)
+    StrategyRule1 strategy_rule1;
+
 }

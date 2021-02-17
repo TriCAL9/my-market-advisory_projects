@@ -10,56 +10,62 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Embedded;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.Map;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * @author CalAF
  */
 @Data
+@Access(AccessType.FIELD)
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor
-@Table("Member")
-public class Member implements BaseMember<Integer> {
+@Table(name = "MEMBER")
+@Entity
+public class Member implements BaseMember<Integer>, Serializable {
 
-    @Column("Counterpart")
+    @Column(name = "Counterpart")
     Integer participantId;
 
     @NonNull
-    @Column("Member_First_Name")
+    @Column(name = "Member_First_Name")
     String memberFirstname;
 
     @NonNull
-    @Column("Member_Last_Name")
+    @Column(name = "Member_Last_Name")
     String memberLastname;
 
-    @Column("Counterpart_Email")
+    @Column(name = "Counterpart_Email")
     String participantEmail;
 
     @Id
     @NonNull
-    @Column("Member_Id")
+    @Column(name = "Member_Id")
     Integer memberId;
 
     @NonNull
-    @Column("Profile_Email")
+    @Column(name = "Profile_Email")
     String profileEmail;
 
+    @ManyToOne
+    @JoinColumn(name = "Profile_Email", insertable = false, updatable = false)
+    UserProfile1 user_profile1;
 
-    @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
+    @ManyToOne
+    @JoinColumn(name = "Member_Id", updatable = false, insertable = false)
+    Member member;
+
+    @OneToMany(mappedBy = "member")
     Set<Member> memberSet;
 
+    @OneToMany(mappedBy = "member")
     Set<Trade> tradeSet;
 
-    @MappedCollection(keyColumn = "Member_Comments")
-    Map<String, Comments> commentsMap;
+    @OneToMany(mappedBy = "member")
+    Set<Comments> commentsMap;
 
-    @MappedCollection(keyColumn = "Member_Rating_Sub")
-    Map<String, RatingSubscription> ratingSubscriptionMap;
+    @OneToMany(mappedBy = "member")
+    Set<RatingSubscription> ratingSubscriptionMap;
 }

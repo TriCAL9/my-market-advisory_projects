@@ -33,7 +33,7 @@ public abstract class BaseCommentsRepoTest<C extends BaseComments<ID, Integer>, 
     @Test(dependsOnGroups = "create member")
     public void testOperation() {
         assertEquals(commentsRepo.count(), 0);
-        C firstEntity = createComments("Hello! This is taking for ever.", 1, "cartworld@shopping.com");
+        C firstEntity = createComments("Hello! This is taking forever.", 1, "cartworld@shopping.com");
         C secondEntity = createComments("It worked!", 2, "lookatusbunch@outl" +
                 "ook.com");
         commentsRepo.save(firstEntity);

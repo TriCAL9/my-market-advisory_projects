@@ -11,9 +11,9 @@ public interface BaseMarketplaceWatchlist1 {
 
     void setMarketId(Integer Market_Id);
 
-    Asset getMarketAssetType();
+    BaseMarketplaceWatchlist1.Asset getMarketAssetType();
 
-    void setMarketAssetType(Asset Market_Asset_Type);
+    void setMarketAssetType(BaseMarketplaceWatchlist1.Asset Market_Asset_Type);
 
     enum Asset {
         STOCK, EFT

@@ -6,49 +6,67 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseSymbol;
-import lombok.AllArgsConstructor;
+import com.marketav.jdbc.scaffold.model.id.SymbolNonEmbeddedId;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.RequiredArgsConstructor;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * @author CalAF
  */
 @Data
-@AllArgsConstructor(staticName = "of")
-@Table
-public class Symbol implements BaseSymbol<String> {
+@IdClass(value = SymbolNonEmbeddedId.class)
+@Access(AccessType.FIELD)
+@RequiredArgsConstructor(staticName = "of")
+@NoArgsConstructor
+@Table(name = "SYMBOL")
+@Entity
+public class Symbol implements BaseSymbol<Character>, Serializable {
     @Id
     @NonNull
-    @Column("Symbol_Sign")
-    String symbolSign;
+    @Column(name = "Symbol_Sign")
+    Character symbolSign;
 
     @NonNull
-    @Column("Symbol_Type")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Symbol_Type")
     Asset symbolType;
 
     @NonNull
-    @Column("Symbol_Rating")
+    @Column(name = "Symbol_Rating")
     String symbolRating;
 
+    @Id
     @NonNull
-    @Column("Profile_Email")
+    @Column(name = "Profile_Email")
     String profileEmail;
 
+    @Id
     @NonNull
-    @Column("Member_Id")
+    @Column(name = "Member_Id")
     Integer memberId;
 
+    @Id
     @NonNull
-    @Column("Market_Id")
+    @Column(name = "Market_Id")
     Integer marketId;
 
+    @Id
     @NonNull
-    @Column("Market_Transaction_Date")
+    @Column(name = "Market_Transaction_Date")
     LocalDate marketTransactionDate;
 
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "Market_Id", updatable = false, insertable = false, referencedColumnName = "Market_Id"),
+            @JoinColumn(name = "Market_Transaction_Date", updatable = false, insertable = false, referencedColumnName = "Market_Transaction_Date"),
+            @JoinColumn(name = "Member_Id", updatable = false, insertable = false, referencedColumnName = "Member_Id"),
+            @JoinColumn(name = "Profile_Email", updatable = false, insertable = false, referencedColumnName = "Profile_Email")
+    })
+    Trade trade;
 }

@@ -9,8 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface BaseUserProfile2Repo<T extends BaseUserProfile2, ID extends Serializable> extends CrudRepository<T, ID> {
-    @Query("SELECT FROM P.* WHERE user_profile2 "
-            + "P.Currently_Signed_in = :status")
+    @Query("SELECT * FROM User_Profile2 P2 WHERE " +
+            "P2.Currently_Signed_In = :status")
     List<T> findByStatus(@Param(":status") boolean signedIn);
-
 }

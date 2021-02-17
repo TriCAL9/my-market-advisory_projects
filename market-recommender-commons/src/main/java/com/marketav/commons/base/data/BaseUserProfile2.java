@@ -8,7 +8,7 @@ public interface BaseUserProfile2 {
 
     void setLoggedOut(LocalDate Logged_Out);
 
-    boolean isCurrentlySignedIn();
+    boolean isStatus();
 
-    void setCurrentlySignedIn(boolean Currently_Signed_In);
+    void setStatus(boolean Currently_Signed_In);
 }

@@ -8,31 +8,34 @@ package com.marketav.jdbc.scaffold.model;
 import com.marketav.commons.base.data.BaseMarketplaceWatchlist2;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.lang.NonNull;
 
-import java.util.Map;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @author CalAF
  */
 
 @Data
+@Access(AccessType.FIELD)
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
-@Table
-public class MarketplaceWatchlist2 implements BaseMarketplaceWatchlist2<Integer> {
+@Table(name = "MARKETPLACE_WATCHLIST2")
+@Entity
+public class MarketplaceWatchlist2 implements BaseMarketplaceWatchlist2<Integer>, Serializable {
+
     @Id
     @NonNull
+    @Column(name = "Market_Id")
     Integer marketId;
 
     @NonNull
+    @Column(name = "Market_Portfolio_Name")
     String marketPortfolioName;
 
-    @MappedCollection(keyColumn = "Market_Transaction_Date")
-    Map<Integer, MarketplaceWatchlist1> marketplaceWatchlist1Set;
-
+    @OneToMany(mappedBy = "marketplace_watchlist2")
+    Set<MarketplaceWatchlist1> marketplaceWatchlist1Set;
 }

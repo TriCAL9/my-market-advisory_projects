@@ -3,9 +3,9 @@ package com.marketav.jdbc;
 import api.recomm.test.BaseCommentsRepoTest;
 import com.marketav.jdbc.scaffold.model.Comments;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-@JdbcTest
+@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CommentsRepoTest extends BaseCommentsRepoTest<Comments, String> {
     @Override

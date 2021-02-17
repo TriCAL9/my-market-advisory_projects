@@ -10,14 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Embedded;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
 
-import java.time.LocalDate;
-import java.util.Map;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -25,22 +20,30 @@ import java.util.Set;
  */
 
 @Data
+@Access(AccessType.FIELD)
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
-@Table("user_profile1")
-public class UserProfile1 implements BaseUserProfile1<String> {
+@Table(name = "USER_PROFILE1")
+@Entity
+public class UserProfile1 implements BaseUserProfile1<String>, Serializable {
+
     @NonNull
-    @Column("Profile_Name")
+    @Column(name = "Profile_Name")
     String profileName;
+
     @Id
     @NonNull
-    @Column("Profile_Email")
+    @Column(name = "Profile_Email")
     String profileEmail;
+
     @NonNull
-    @Column("Profile_Password")
+    @Column(name = "Profile_Password")
     String profilePassword;
-    @MappedCollection(keyColumn = "Signed_in")
-    Map<LocalDate, UserProfile2> userProfile1Map;
-    @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
-    Set<Member> member;
+
+    @OneToMany(mappedBy = "user_profile1")
+    Set<UserProfile2> userProfile2Set;
+
+    @OneToMany(mappedBy = "user_profile1")
+    Set<Member> memberSet;
+
 }

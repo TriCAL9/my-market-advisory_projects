@@ -9,9 +9,9 @@ public interface BaseStrategyRule2<ID> {
 
     void setTechnicalIndicator(String Technical_Indicator);
 
-    Integer getTarget();
+    Double getTarget();
 
-    void setTarget(Integer Target);
+    void setTarget(Double Target);
 
     String getStage();
 

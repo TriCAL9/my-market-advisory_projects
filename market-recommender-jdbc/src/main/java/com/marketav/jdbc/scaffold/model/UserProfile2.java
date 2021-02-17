@@ -6,14 +6,14 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseUserProfile2;
+import com.marketav.jdbc.scaffold.model.id.UserProfile2NonEmbeddedId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -22,22 +22,31 @@ import java.time.LocalDate;
 
 
 @Data
+@IdClass(value = UserProfile2NonEmbeddedId.class)
+@Access(AccessType.FIELD)
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
-@Table("User_Profile2")
-public class UserProfile2 implements BaseUserProfile2 {
-    @Column("Logged_Out")
+@Table(name = "USER_PROFILE2")
+@Entity
+public class UserProfile2 implements BaseUserProfile2, Serializable {
+
+    @Column(name = "Logged_Out")
     LocalDate loggedOut;
 
-    @Column("Currently_Signed_In")
-    boolean currentlySignedIn;
+    @Column(name = "Currently_Signed_In")
+    boolean status;
 
+    @Id
     @NonNull
-    @Column("Profile_Email")
+    @Column(name = "Profile_Email")
     String profileEmail;
 
     @Id
     @NonNull
-    @Column("Signed_in")
+    @Column(name = "Signed_in")
     LocalDate signedIn;
+
+    @ManyToOne
+    @JoinColumn(name = "Profile_Email", updatable = false, insertable = false)
+    UserProfile1 user_profile1;
 }

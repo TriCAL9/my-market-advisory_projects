@@ -1,27 +1,42 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseComments;
-import lombok.AllArgsConstructor;
+import com.marketav.jdbc.scaffold.model.id.CommentsNonEmbeddedId;
 import lombok.Data;
-import lombok.NonNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
 
 @Data
-@AllArgsConstructor(staticName = "of")
-@Table("Comments")
-public class Comments implements BaseComments<String, Integer> {
+@Access(AccessType.FIELD)
+@RequiredArgsConstructor(staticName = "of")
+@NoArgsConstructor
+@Table(name = "COMMENTS")
+@Entity
+@IdClass(CommentsNonEmbeddedId.class)
+public class Comments implements BaseComments<String, Integer>, Serializable {
+
     @Id
     @NonNull
-    @Column("Member_Comment")
+    @Column(name = "Member_Comment")
     String memberComments;
 
+    @Id
     @NonNull
-    @Column("Member_Id")
+    @Column(name = "Member_Id")
     Integer memberId;
 
+    @Id
     @NonNull
-    @Column("Profile_Email")
+    @Column(name = "Profile_Email")
     String profileEmail;
+
+    @ManyToOne
+    @JoinColumn(insertable = false, updatable = false, name = "Member_Id")
+    Member member;
+
 }

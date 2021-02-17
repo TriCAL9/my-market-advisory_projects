@@ -1,5 +1,6 @@
 package com.marketav.commons.base.data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface BaseTrade {
@@ -19,9 +20,9 @@ public interface BaseTrade {
 
     void setMarketId(Integer Market_Id);
 
-    Double getTradePrice();
+    BigDecimal getTradePrice();
 
-    void setTradePrice(Double Trade_Price);
+    void setTradePrice(BigDecimal Trade_Price);
 
     LocalDate getTradeClosingDate();
 

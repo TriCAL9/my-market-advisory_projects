@@ -1,34 +1,45 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseRatingSubscription;
+import com.marketav.jdbc.scaffold.model.id.RatingSubscriptionNonEmbeddedId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.Map;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Data
+@Access(AccessType.FIELD)
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
-@Table("Rating_Subscription")
-public class RatingSubscription implements BaseRatingSubscription<String, Integer> {
+@Table(name = "RATING_SUBSCRIPTION")
+@IdClass(RatingSubscriptionNonEmbeddedId.class)
+@Entity
+public class RatingSubscription implements BaseRatingSubscription<String, Integer>, Serializable {
+
     @Id
     @NonNull
-    @Column("Member_Rating_Subscription")
+    @Column(name = "Member_Rating_Sub")
     String memberRatingSubscription;
 
+    @Id
     @NonNull
-    @Column("Profile_Email")
+    @Column(name = "Profile_Email")
     String profileEmail;
 
+    @Id
     @NonNull
+    @Column(name = "Member_Id")
     Integer memberId;
 
-    @MappedCollection(keyColumn = "Strategy_Id")
-    Map<String, StrategyRule1> stringStrategyRule1Map;
+    @ManyToOne
+    @JoinColumn(name = "Member_Id", updatable = false, insertable = false)
+    Member member;
+
+    @OneToMany(mappedBy = "rating_subscription")
+    Set<StrategyRule1> strategyRule1s;
+
 }

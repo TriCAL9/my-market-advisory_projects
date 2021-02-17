@@ -3,9 +3,9 @@ package com.marketav.jdbc;
 import api.recomm.test.BaseRatingSubscriptionRepoTest;
 import com.marketav.jdbc.scaffold.model.RatingSubscription;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-@JdbcTest
+@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class RatingSubscriptionRepoTest extends BaseRatingSubscriptionRepoTest<RatingSubscription, String> {
     @Override

@@ -17,9 +17,9 @@ version = '0.1.1-SNAPSHOT'
 
 dependencies {
     implementation 'org.springframework:spring-tx'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:2.4.2'
+    implementation 'org.springframework.data:spring-data-commons'
     implementation 'org.springframework:spring-beans'
-
+    implementation 'org.springframework.data:spring-data-jdbc'
     compileOnly 'org.projectlombok:lombok:1.18.14'
     annotationProcessor 'org.projectlombok:lombok:1.18.14'
 }
