@@ -5,6 +5,7 @@
  */
 package com.marketav.jdbc.scaffold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseTrade;
 import com.marketav.jdbc.scaffold.model.id.TradeNonEmbeddedId;
 import lombok.*;
@@ -69,6 +70,7 @@ public class Trade implements BaseTrade, Serializable {
     String memberLastName;
 
     @OneToMany(mappedBy = "trade")
+    @JsonIgnore
     Set<Symbol> symbolSet;
 
     @ManyToOne

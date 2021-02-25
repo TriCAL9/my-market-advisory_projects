@@ -5,11 +5,9 @@
  */
 package com.marketav.jdbc.scaffold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseStrategyRule1;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,6 +20,7 @@ import java.util.Set;
 @Access(AccessType.FIELD)
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
+@EqualsAndHashCode(exclude = "strategyRule2Set")
 @Table(name = "STRATEGY_RULE1")
 @Entity
 public class StrategyRule1 implements BaseStrategyRule1<Integer>, Serializable {
@@ -55,6 +54,8 @@ public class StrategyRule1 implements BaseStrategyRule1<Integer>, Serializable {
             @JoinColumn(name = "Profile_Email", updatable = false, insertable = false, referencedColumnName = "Profile_Email")
     })
     RatingSubscription rating_subscription;
-    @OneToMany(mappedBy = "strategy_rule1")
-    Set<StrategyRule2> strategyRule2Map;
+    @OneToMany(mappedBy = "strategy_rule1"
+    )
+    @JsonIgnore
+    Set<StrategyRule2> strategyRule2Set;
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import static org.testng.Assert.assertEquals;
-
+@Test(groups = "testUserProfile2")
 public abstract class BaseUserProfile2RepoTest<U extends BaseUserProfile2, ID extends Serializable> extends AbstractTestNGSpringContextTests {
     @Autowired
     BaseUserProfile2Repo<U, ID> userProfile2Repo;

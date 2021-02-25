@@ -1,11 +1,9 @@
 package com.marketav.jdbc.scaffold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseRatingSubscription;
 import com.marketav.jdbc.scaffold.model.id.RatingSubscriptionNonEmbeddedId;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,6 +15,7 @@ import java.util.Set;
 @RequiredArgsConstructor(staticName = "of")
 @Table(name = "RATING_SUBSCRIPTION")
 @IdClass(RatingSubscriptionNonEmbeddedId.class)
+@EqualsAndHashCode(exclude = {"strategyRule1"})
 @Entity
 public class RatingSubscription implements BaseRatingSubscription<String, Integer>, Serializable {
 
@@ -40,6 +39,7 @@ public class RatingSubscription implements BaseRatingSubscription<String, Intege
     Member member;
 
     @OneToMany(mappedBy = "rating_subscription")
-    Set<StrategyRule1> strategyRule1s;
+    @JsonIgnore
+    Set<StrategyRule1> strategyRule1;
 
 }

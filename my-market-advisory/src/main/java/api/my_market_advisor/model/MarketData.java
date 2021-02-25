@@ -18,7 +18,7 @@ public abstract class MarketData {
 
         private String symbol;
 
-        public Builder addSymbol(String symbol) {
+        public Builder<?> addSymbol(String symbol) {
             this.symbol = symbol;
             return self();
         }

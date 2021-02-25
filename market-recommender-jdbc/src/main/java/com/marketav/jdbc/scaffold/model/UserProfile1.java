@@ -5,11 +5,12 @@
  */
 package com.marketav.jdbc.scaffold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseUserProfile1;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +24,8 @@ import java.util.Set;
 @Access(AccessType.FIELD)
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
+@EqualsAndHashCode(exclude = {"userProfile2Set", "memberSet"})
+@ToString(exclude = {"userProfile2Set", "memberSet"})
 @Table(name = "USER_PROFILE1")
 @Entity
 public class UserProfile1 implements BaseUserProfile1<String>, Serializable {
@@ -40,10 +43,14 @@ public class UserProfile1 implements BaseUserProfile1<String>, Serializable {
     @Column(name = "Profile_Password")
     String profilePassword;
 
-    @OneToMany(mappedBy = "user_profile1")
+    @OneToMany(mappedBy = "user_profile1", fetch = FetchType.EAGER)
+    @JsonIgnore
     Set<UserProfile2> userProfile2Set;
 
-    @OneToMany(mappedBy = "user_profile1")
-    Set<Member> memberSet;
-
+    @OneToOne(fetch = FetchType.EAGER)
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE})
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JsonIgnore
+    @JoinColumn(name = "Member_Id", updatable = false, insertable = false)
+    Member memberSet;
 }

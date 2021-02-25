@@ -5,8 +5,10 @@
  */
 package com.marketav.jdbc.scaffold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseMarketplaceWatchlist2;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
@@ -25,6 +27,7 @@ import java.util.Set;
 @RequiredArgsConstructor(staticName = "of")
 @Table(name = "MARKETPLACE_WATCHLIST2")
 @Entity
+@EqualsAndHashCode(exclude = "marketplaceWatchlist1Set")
 public class MarketplaceWatchlist2 implements BaseMarketplaceWatchlist2<Integer>, Serializable {
 
     @Id
@@ -37,5 +40,6 @@ public class MarketplaceWatchlist2 implements BaseMarketplaceWatchlist2<Integer>
     String marketPortfolioName;
 
     @OneToMany(mappedBy = "marketplace_watchlist2")
+    @JsonIgnore
     Set<MarketplaceWatchlist1> marketplaceWatchlist1Set;
 }

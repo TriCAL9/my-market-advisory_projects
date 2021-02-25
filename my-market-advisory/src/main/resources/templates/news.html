@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <title th:each="stockProfile : ${stockProfile}" th:text="${stockProfile.getCompanyName()}"> Recent Headlines</title>
-    <link dir="auto" href="css/flex-news.css" rel="stylesheet" type="text/css">
+    <link href=/css/main.css rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link crossorigin="anonymous" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css}">
+
 </head>
 
-<body>
+<body class=frame-1>
 
 <section>
-    <div>
-        <h3 th:text="${stockProfile.getSymbol()}"></h3>
-        <div th:each="stockProfile : ${stockProfile}">
-            <p th:text="${stockProfile.getDescription()}"></p>
-            <p th:text="${stockProfile.getExchange()}"></p>
-            <p th:text="${stockProfile.getWebsite()}"></p>
+    <div class="container-fluid">
+        <!-- Content here -->
+        <div class="row justify-content-sm-center">
+            <h3 th:text="${stockProfile.getSymbol()}"></h3>
+            <img class="news-article-img-company" th:src="@{${logo.getUrl()}}" width="100px"/>
+            <div class="col-3">
+                <p class="company-description" th:text="${stockProfile.getExchange()}">[(${logo.toString)]</p>
+            </div>
+            <div class="col-6">
+                <p class="company-description" th:text="${stockProfile.getDescription()}"></p>
+            </div>
+            <div class="col-3">
+                <p class="company-description" th:text="${stockProfile.getWebsite()}"></p>
+            </div>
         </div>
-    </div>
-    <div th:each="latestNews : ${latestNews}">
-        <h4 th:text="${latestNews.getHeadline()}">Wished I worked here.</h4>
-        <h5 th:text="${latestNews.getSource()}">Symbol and Price</h5>
-        <p th:text="${latestNews.getSummary()}"> Summary </p>
-        <a th:href="@{${latestNews.getUrl()}}"> <img class="news-article-img" th:src="@{${latestNews.getImage()}}"
-                                                     width="100px"></a>
+        <div class="row row-col-2">
+            <div class="col-6" th:each="latestNews : ${latestNews}">
+                <h4 th:text="${latestNews.getSource()}">Symbol and Price</h4>
+                <a th:href="@{${latestNews.getUrl()}}">
+                    <img class="news-article-img" th:src="@{${latestNews.getImage()}}"/></a>
+                <h5 id="article-headline-format" th:text="${latestNews.getHeadline()}">Wished I worked here.</h5>
+
+            </div>
+        </div>
     </div>
 </section>
 
 </body>
+
 </html>

@@ -3,3 +3,7 @@ img.news-article-img {
             width: 100px;
             height: 100px;
 }
+img.news-article-img-company {
+            display:block;
+            width: 35px;
+}

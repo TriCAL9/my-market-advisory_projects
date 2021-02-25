@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories
 @EntityScan
 public class MarketAvJdbcApplicationConfig {
+    //TODO: Create a service to delete all users from the database.
     public static void main(String[] args) {
         SpringApplication.run(MarketAvJdbcApplicationConfig.class, args);
     }

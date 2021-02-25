@@ -5,9 +5,11 @@
  */
 package com.marketav.jdbc.scaffold.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseMarketplaceWatchlist1;
 import com.marketav.jdbc.scaffold.model.id.MarketplaceWatchlist1NonEmbeddedId;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
@@ -27,6 +29,7 @@ import java.util.Set;
 @RequiredArgsConstructor(staticName = "of")
 @Table(name = "MARKETPLACE_WATCHLIST1")
 @Entity
+@EqualsAndHashCode(exclude = "tradeSet")
 public class MarketplaceWatchlist1 implements BaseMarketplaceWatchlist1, Serializable {
     @Id
     @NonNull
@@ -41,6 +44,7 @@ public class MarketplaceWatchlist1 implements BaseMarketplaceWatchlist1, Seriali
     @Enumerated(EnumType.STRING)
     BaseMarketplaceWatchlist1.Asset marketAssetType;
     @OneToMany(mappedBy = "marketplace_watchlist1")
+    @JsonIgnore
     Set<Trade> tradeSet;
     @ManyToOne
     @JoinColumn(name = "Market_Id", insertable = false, updatable = false)

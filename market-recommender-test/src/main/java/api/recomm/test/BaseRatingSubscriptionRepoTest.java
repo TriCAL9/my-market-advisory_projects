@@ -28,7 +28,7 @@ public abstract class BaseRatingSubscriptionRepoTest<R extends BaseRatingSubscri
     }
 
 
-    @Test(dependsOnGroups = "create member")
+    @Test(dependsOnGroups = "testMember")
     public void testOperation() {
         assertEquals(ratingSubscriptionRepo.count(), 0);
         R firstEntity = createSubscription("MACD indicator", "cartworld@shopping.com", 1);

@@ -44,7 +44,7 @@ class TestMarketController extends AbstractTestNGSpringContextTests {
     @Test(dataProvider = "companyFields", alwaysRun = true)
     public void testNewsFeed(String symbol, String last) throws Exception {
         this.mockMVC = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        MockHttpServletResponse response = this.mockMVC.perform(get("http://localhost:"
+        MockHttpServletResponse response = this.mockMVC.perform(get("https://localhost:"
                 + "8080" + "/"
                 + symbol + "/"
                 + last)
