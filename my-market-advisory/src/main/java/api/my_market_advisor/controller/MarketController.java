@@ -3,7 +3,7 @@ package api.my_market_advisor.controller;
 import api.my_market_advisor.model.Logo;
 import api.my_market_advisor.model.News;
 import api.my_market_advisor.model.StockProfile;
-import api.my_market_advisor.resource.AppProperties;
+import api.my_market_advisor.service.MarketControllerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -13,19 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @RestController
 public class MarketController extends RestTemplate {
-    private final AppProperties properties;
-
     @Autowired
-    public MarketController(AppProperties properties) {
-        this.properties = properties;
-    }
-
+    MarketControllerProperties env;
     @Autowired
     RestTemplateBuilder builder;
 
@@ -33,10 +29,10 @@ public class MarketController extends RestTemplate {
     public ModelAndView feedNews(@PathVariable(name = "symbol") String symbol
             , @PathVariable(name = "last") String last) {
         final ModelAndView news = new ModelAndView("news");
-        var size = Integer.parseInt(last);
+        final var size = Integer.parseInt(last);
         List<News> latestNews = new ArrayList<>();
         for (News.Builder builders : buildMarketData(symbol, size, News.Builder[].class)) {
-            var news1 = builders.build();
+            final var news1 = builders.build();
             latestNews.add(builders.addSummary(news1.getSummary()).build());
         }
         news.addObject("stockProfile", buildMarketData(symbol, StockProfile.Builder.class).addSymbol(symbol).build());
@@ -58,7 +54,7 @@ public class MarketController extends RestTemplate {
     }
 
     public Logo getLogo(String symbol) {
-        var temp = properties.getLogo().expand(symbol, properties.getIex_cloud_key());
+        var temp = env.getProperties().getLogo().expand(symbol, env.getProperties().getIex_cloud_key());
         return Objects.requireNonNull(restTemplate(builder).getForObject(temp.toString(), Logo.class), "Logo not found");
     }
 
@@ -67,13 +63,12 @@ public class MarketController extends RestTemplate {
         return builder.build();
     }
 
-    private String initializeURI(String symbol, String filter, int last) {
-        return this.properties.getUrl().expand(symbol, filter, this.properties.getLast().expand(last), this
-                .properties.getIex_cloud_key()).toString();
+    private URI initializeURI(String symbol, String filter, int last) {
+        return env.getProperties().getUrl().expand(symbol, filter, env.getProperties().getLast().expand(last), env.getProperties().getIex_cloud_key());
     }
 
-    private String initializeURI(String symbol, String filter) {
-        return this.properties.getCompanyUrl().expand(symbol, filter, this.properties.getIex_cloud_key()).toString();
+    private URI initializeURI(String symbol, String filter) {
+        return env.getProperties().getCompanyUrl().expand(symbol, filter, env.getProperties().getIex_cloud_key());
     }
 
 }
