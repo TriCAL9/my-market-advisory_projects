@@ -26,6 +26,6 @@ public class MarketAdvisoryApplication {
     // - create backend classes for recommendation feature
 
     //FIXME
-    // - image property in class StockProfile
+    // - loading static css/main.css file
 
 }
