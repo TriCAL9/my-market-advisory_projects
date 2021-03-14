@@ -1,4 +1,4 @@
-package com.marketav.jdbc.scaffold.model.id;
+package com.marketav.commons.implemented.id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
