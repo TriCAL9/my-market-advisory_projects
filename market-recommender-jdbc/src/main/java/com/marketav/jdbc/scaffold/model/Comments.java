@@ -1,9 +1,9 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseComments;
-import com.marketav.jdbc.scaffold.model.id.CommentsNonEmbeddedId;
+import com.marketav.commons.implemented.id.CommentsNonEmbeddedId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 
@@ -14,11 +14,12 @@ import java.io.Serializable;
 @Data
 @Access(AccessType.FIELD)
 @RequiredArgsConstructor(staticName = "of")
-@NoArgsConstructor
+
+@AllArgsConstructor
 @Table(name = "COMMENTS")
 @Entity
 @IdClass(CommentsNonEmbeddedId.class)
-public class Comments implements BaseComments<String, Integer>, Serializable {
+public class Comments implements BaseComments<String>, Serializable {
 
     @Id
     @NonNull
@@ -32,11 +33,16 @@ public class Comments implements BaseComments<String, Integer>, Serializable {
 
     @Id
     @NonNull
-    @Column(name = "Profile_Email")
+    @Column(name = "Profile_Email", columnDefinition = "varchar(45)")
     String profileEmail;
 
     @ManyToOne
-    @JoinColumn(insertable = false, updatable = false, name = "Member_Id")
+    @JoinColumns(value = {
+            @JoinColumn(name = "Profile_Email", updatable = false, insertable = false),
+            @JoinColumn(name = "Member_Id", updatable = false, insertable = false)
+    })
     Member member;
 
+    public Comments() {
+    }
 }
