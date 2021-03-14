@@ -18,5 +18,5 @@ public interface BaseMemberRepo<T extends BaseMember<ID>, ID> extends CrudReposi
             "AND Member_Last_Name = :lastname")
     List<T> findAllMemberByMemberFirstnameAndMemberLastname(String firstname, String lastname);
 
-    Optional<T> findDistinctMemberAllByProfileEmail(String email);
+    Optional<T> findMemberByUserProfile1ProfileName(String name);
 }
