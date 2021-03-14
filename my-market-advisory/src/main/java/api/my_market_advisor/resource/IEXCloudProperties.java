@@ -8,7 +8,7 @@ import org.springframework.web.util.UriTemplate;
 @ConfigurationProperties("app")
 @Getter
 @Setter
-public class AppProperties {
+public class IEXCloudProperties {
     private UriTemplate url;
     private UriTemplate companyUrl;
     private UriTemplate last;
