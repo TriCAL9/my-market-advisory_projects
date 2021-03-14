@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class News extends MarketData {
+final public class News extends MarketData {
 
     private final static String PARAMETER = "news";
     private final boolean hasPayWall;
@@ -16,7 +16,7 @@ public class News extends MarketData {
     private final String url;
     private final String image;
 
-    News(Builder builder) {
+    private News(Builder builder) {
         super(builder);
         headline = builder.headline;
         summary = builder.summary;
@@ -88,17 +88,17 @@ public class News extends MarketData {
 
         public Builder addSummary(String summary) {
             this.summary = summary;
-            return this;
+            return self();
         }
 
         public Builder addDateTime(int datetime) {
             this.datetime = datetime;
-            return this;
+            return self();
         }
 
         public Builder addHasPayWall(boolean hasPayWall) {
             this.hasPayWall = hasPayWall;
-            return this;
+            return self();
         }
 
         @Override
