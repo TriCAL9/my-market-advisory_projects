@@ -12,6 +12,6 @@ import java.time.LocalDate;
 public class UserProfile2RepoTest extends BaseUserProfile2RepoTest<UserProfile2, LocalDate> {
     @Override
     protected UserProfile2 createUserProfile2(String email, LocalDate timeIn, LocalDate timeOut, boolean signedInStatus) {
-        return UserProfile2.of(email, timeIn);
+        return UserProfile2.of(timeOut, email, timeIn);
     }
 }

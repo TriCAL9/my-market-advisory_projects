@@ -6,7 +6,7 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseUserProfile2;
-import com.marketav.jdbc.scaffold.model.id.UserProfile2NonEmbeddedId;
+import com.marketav.commons.implemented.id.UserProfile2NonEmbeddedId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -29,7 +29,7 @@ import java.time.LocalDate;
 @Table(name = "USER_PROFILE2")
 @Entity
 public class UserProfile2 implements BaseUserProfile2, Serializable {
-
+    @NonNull
     @Column(name = "Logged_Out")
     LocalDate loggedOut;
 
@@ -38,7 +38,7 @@ public class UserProfile2 implements BaseUserProfile2, Serializable {
 
     @Id
     @NonNull
-    @Column(name = "Profile_Email")
+    @Column(name = "Profile_Email", columnDefinition = "varchar(45)")
     String profileEmail;
 
     @Id
