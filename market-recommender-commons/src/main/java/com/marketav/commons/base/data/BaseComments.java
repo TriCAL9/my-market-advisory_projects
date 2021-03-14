@@ -1,15 +1,15 @@
 package com.marketav.commons.base.data;
 
-public interface BaseComments<ID, FK> {
+public interface BaseComments<ID> {
     ID getMemberComments();
 
     void setMemberComments(ID Member_Comments);
 
-    FK getMemberId();
+    Integer getMemberId();
 
-    void setMemberId(FK Member_Id);
+    void setMemberId(Integer Member_Id);
 
-    String getProfileEmail();
+    ID getProfileEmail();
 
-    void setProfileEmail(String Profile_Email);
+    void setProfileEmail(ID Profile_Email);
 }
