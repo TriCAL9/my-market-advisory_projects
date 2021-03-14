@@ -1,4 +1,4 @@
-package com.marketav.jdbc.scaffold.model.id;
+package com.marketav.commons.implemented.id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,9 +10,9 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TradeNonEmbeddedId implements Serializable {
+public class SymbolNonEmbeddedId implements Serializable {
     String profileEmail;
     Integer memberId;
-    LocalDate marketTransactionDate;
     Integer marketId;
+    LocalDate marketTransactionDate;
 }

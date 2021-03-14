@@ -2,7 +2,7 @@ package com.marketav.jdbc.scaffold.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseRatingSubscription;
-import com.marketav.jdbc.scaffold.model.id.RatingSubscriptionNonEmbeddedId;
+import com.marketav.commons.implemented.id.RatingSubscriptionNonEmbeddedId;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ import java.util.Set;
 @IdClass(RatingSubscriptionNonEmbeddedId.class)
 @EqualsAndHashCode(exclude = {"strategyRule1"})
 @Entity
-public class RatingSubscription implements BaseRatingSubscription<String, Integer>, Serializable {
+public class RatingSubscription implements BaseRatingSubscription<String>, Serializable {
 
     @Id
     @NonNull
@@ -26,7 +26,7 @@ public class RatingSubscription implements BaseRatingSubscription<String, Intege
 
     @Id
     @NonNull
-    @Column(name = "Profile_Email")
+    @Column(name = "Profile_Email", columnDefinition = "varchar(45)")
     String profileEmail;
 
     @Id
@@ -35,7 +35,10 @@ public class RatingSubscription implements BaseRatingSubscription<String, Intege
     Integer memberId;
 
     @ManyToOne
-    @JoinColumn(name = "Member_Id", updatable = false, insertable = false)
+    @JoinColumns({
+            @JoinColumn(name = "Profile_Email", updatable = false, insertable = false),
+            @JoinColumn(name = "Member_Id", updatable = false, insertable = false)
+    })
     Member member;
 
     @OneToMany(mappedBy = "rating_subscription")

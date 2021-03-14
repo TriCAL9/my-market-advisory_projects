@@ -33,7 +33,7 @@ public class StrategyRule1 implements BaseStrategyRule1<Integer>, Serializable {
     @Column(name = "Strategy_Researcher")
     String strategyResearcher;
     @NonNull
-    @Column(name = "Strategy_Summary")
+    @Column(name = "Strategy_Summary", columnDefinition = "MEDIUMTEXT")
     String strategySummary;
     @NonNull
     @Column(name = "Strategy_Source_URL")
@@ -42,7 +42,7 @@ public class StrategyRule1 implements BaseStrategyRule1<Integer>, Serializable {
     @Column(name = "Member_Rating_Sub")
     String memberRatingSub;
     @NonNull
-    @Column(name = "Profile_Email")
+    @Column(name = "Profile_Email", columnDefinition = "varchar(45)")
     String profileEmail;
     @NonNull
     @Column(name = "Member_Id")

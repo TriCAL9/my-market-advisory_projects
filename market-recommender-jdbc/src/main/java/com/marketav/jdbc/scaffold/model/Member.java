@@ -6,8 +6,8 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseMember;
+import com.marketav.commons.implemented.id.MemberNonEmbeddedId;
 import lombok.*;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -23,9 +23,10 @@ import java.util.Set;
 @Access(AccessType.FIELD)
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"ratingSubscriptionSet", "commentsSet", "tradeSet", "memberSet"})
-@ToString(exclude = {"ratingSubscriptionSet", "commentsSet", "tradeSet", "memberSet"})
+@EqualsAndHashCode(exclude = {"ratingSubscriptionSet", "commentsSet", "tradeSet", "counterpartSet"})
+@ToString(exclude = {"ratingSubscriptionSet", "commentsSet", "tradeSet", "counterpartSet"})
 @Table(name = "MEMBER")
+@IdClass(MemberNonEmbeddedId.class)
 @Entity
 public class Member implements BaseMember<Integer>, Serializable {
 
@@ -48,6 +49,7 @@ public class Member implements BaseMember<Integer>, Serializable {
     @Column(name = "Member_Id")
     Integer memberId;
 
+    @Id
     @NonNull
     @Column(name = "Profile_Email")
     String profileEmail;
@@ -55,26 +57,25 @@ public class Member implements BaseMember<Integer>, Serializable {
     @ManyToOne
     @JoinColumn(name = "Profile_Email", updatable = false, insertable = false)
     @NotFound(action = NotFoundAction.IGNORE)
-    UserProfile1 user_profile1;
+    UserProfile1 userProfile1;
 
     @ManyToOne
-    @JoinColumn(name = "Counterpart", updatable = false, insertable = false)
+    @JoinColumns({
+            @JoinColumn(name = "Counterpart", updatable = false, insertable = false),
+            @JoinColumn(name = "Counterpart_Email", updatable = false, insertable = false)
+    })
     @JsonBackReference
     Member counterpart;
 
     @OneToMany(mappedBy = "counterpart", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     Set<Member> counterpartSet;
 
     @OneToMany(mappedBy = "member")
-    @JsonIgnore
     Set<Trade> tradeSet;
 
     @OneToMany(mappedBy = "member")
-    @JsonIgnore
     Set<Comments> commentsSet;
 
     @OneToMany(mappedBy = "member")
-    @JsonIgnore
     Set<RatingSubscription> ratingSubscriptionSet;
 }

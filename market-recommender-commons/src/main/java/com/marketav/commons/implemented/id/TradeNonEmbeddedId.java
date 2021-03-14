@@ -1,16 +1,18 @@
-package com.marketav.jdbc.scaffold.model.id;
+package com.marketav.commons.implemented.id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RatingSubscriptionNonEmbeddedId implements Serializable {
-    String memberRatingSubscription;
+public class TradeNonEmbeddedId implements Serializable {
     String profileEmail;
     Integer memberId;
+    LocalDate marketTransactionDate;
+    Integer marketId;
 }

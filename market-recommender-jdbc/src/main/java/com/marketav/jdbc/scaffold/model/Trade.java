@@ -7,7 +7,7 @@ package com.marketav.jdbc.scaffold.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseTrade;
-import com.marketav.jdbc.scaffold.model.id.TradeNonEmbeddedId;
+import com.marketav.commons.implemented.id.TradeNonEmbeddedId;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,7 +30,7 @@ import java.util.Set;
 public class Trade implements BaseTrade, Serializable {
     @Id
     @NonNull
-    @Column(name = "Profile_Email")
+    @Column(name = "Profile_Email", columnDefinition = "varchar(45)")
     String profileEmail;
     @Id
     @NonNull

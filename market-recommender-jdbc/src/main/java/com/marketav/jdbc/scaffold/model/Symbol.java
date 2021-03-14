@@ -6,7 +6,7 @@
 package com.marketav.jdbc.scaffold.model;
 
 import com.marketav.commons.base.data.BaseSymbol;
-import com.marketav.jdbc.scaffold.model.id.SymbolNonEmbeddedId;
+import com.marketav.commons.implemented.id.SymbolNonEmbeddedId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -43,7 +43,7 @@ public class Symbol implements BaseSymbol<Character>, Serializable {
 
     @Id
     @NonNull
-    @Column(name = "Profile_Email")
+    @Column(name = "Profile_Email", columnDefinition = "varchar(45)")
     String profileEmail;
 
     @Id

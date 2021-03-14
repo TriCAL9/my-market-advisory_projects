@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author CalAF
@@ -38,9 +39,8 @@ public class StrategyRule2 implements BaseStrategyRule2<Integer>, Serializable {
     @Column(name = "Stage")
     String stage;
 
-    @NonNull
     @Column(name = "Target")
-    Double target;
+    BigDecimal target;
 
     @NonNull
     @Column(name = "Strategy_Id")
