@@ -1,6 +1,6 @@
 package com.marketav.commons.base.data;
 
-public interface BaseRatingSubscription<ID, FK> {
+public interface BaseRatingSubscription<ID> {
     ID getMemberRatingSubscription();
 
     void setMemberRatingSubscription(ID Member_Rating_Subscription);
@@ -9,7 +9,7 @@ public interface BaseRatingSubscription<ID, FK> {
 
     void setProfileEmail(ID Profile_Email);
 
-    FK getMemberId();
+    Integer getMemberId();
 
-    void setMemberId(FK Member_Id);
+    void setMemberId(Integer Member_Id);
 }

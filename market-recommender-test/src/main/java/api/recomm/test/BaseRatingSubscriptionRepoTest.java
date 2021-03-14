@@ -6,7 +6,6 @@ import com.marketav.commons.base.repo.BaseRatingSubscriptionRepo;
 import com.marketav.commons.implemented.WildCardConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Optional;
@@ -14,21 +13,15 @@ import java.util.Optional;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-@Test(groups = "memberStuff")
-public abstract class BaseRatingSubscriptionRepoTest<R extends BaseRatingSubscription<ID, Integer>, ID> extends AbstractTestNGSpringContextTests {
+@Test(groups = "testRating")
+public abstract class BaseRatingSubscriptionRepoTest<R extends BaseRatingSubscription<ID>, ID> extends AbstractTestNGSpringContextTests {
     @Autowired
     WildCardConverter wildCardConverter;
 
     @Autowired
     BaseRatingSubscriptionRepo<R, ID> ratingSubscriptionRepo;
 
-    @BeforeMethod(groups = "clearRatings")
-    public void clearRating() {
-        ratingSubscriptionRepo.deleteAll();
-    }
-
-
-    @Test(dependsOnGroups = "testMember")
+    @Test(dependsOnGroups = "testMemberQueries")
     public void testOperation() {
         assertEquals(ratingSubscriptionRepo.count(), 0);
         R firstEntity = createSubscription("MACD indicator", "cartworld@shopping.com", 1);

@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface BaseRatingSubscriptionRepo<R extends BaseRatingSubscription<ID, Integer>, ID> extends CrudRepository<R, ID> {
+public interface BaseRatingSubscriptionRepo<R extends BaseRatingSubscription<ID>, ID> extends CrudRepository<R, ID> {
 
     Optional<R> findRatingSubscriptionByMemberRatingSubscriptionAndMemberId(ID sub, int memberId);
 }
