@@ -6,19 +6,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public abstract class MarketData {
     private final String symbol;
 
-    public MarketData(Builder<?> builder) {
-        symbol = builder.symbol;
-    }
-
     public String getSymbol() {
         return symbol;
     }
 
-    public abstract static class Builder<T extends Builder<?>> {
+    MarketData(Builder<?> builder) {
+        symbol = builder.symbol;
+    }
+
+    abstract static class Builder<T extends Builder<T>> {
 
         private String symbol;
 
-        public Builder<?> addSymbol(String symbol) {
+        public T addSymbol(String symbol) {
             this.symbol = symbol;
             return self();
         }
