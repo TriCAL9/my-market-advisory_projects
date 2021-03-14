@@ -9,8 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class MemberRepoTest extends BaseMemberRepoTest<Member, Integer> {
     @Override
-    protected Member createMember(Integer memberId, String email, Integer participant, String participantEmail, String memberFirstName, String memberLastName) {
-        return Member.of(memberFirstName, memberLastName, memberId, email);
+    protected Member createMember(Integer memberId, String email, Integer participant, String participantEmail, String memberFirstName) {
+        return Member.of(memberFirstName, "Montana", memberId, email);
     }
 
 }
