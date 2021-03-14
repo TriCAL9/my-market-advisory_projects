@@ -5,7 +5,6 @@ import com.marketav.commons.base.repo.BaseCommentsRepo;
 import com.marketav.commons.implemented.WildCardConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.Serializable;
@@ -14,8 +13,8 @@ import java.util.Optional;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
-public abstract class BaseCommentsRepoTest<C extends BaseComments<ID, Integer>, ID extends Serializable> extends AbstractTestNGSpringContextTests {
+@Test(groups = {"testComments"})
+public abstract class BaseCommentsRepoTest<C extends BaseComments<ID>, ID extends Serializable> extends AbstractTestNGSpringContextTests {
 
     @Autowired
     BaseCommentsRepo<C, ID> commentsRepo;
@@ -25,12 +24,7 @@ public abstract class BaseCommentsRepoTest<C extends BaseComments<ID, Integer>, 
 
     protected abstract C createComments(String comments, int memberId, String email);
 
-    @BeforeMethod
-    public void clearComments() {
-        commentsRepo.deleteAll();
-    }
-
-    @Test(dependsOnGroups = "testMember")
+    @Test(dependsOnGroups = "testMemberQueries")
     public void testOperation() {
         assertEquals(commentsRepo.count(), 0);
         C firstEntity = createComments("Hello! This is taking forever.", 1, "cartworld@shopping.com");
