@@ -7,7 +7,7 @@ package com.marketav.jdbc.scaffold.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketav.commons.base.data.BaseMarketplaceWatchlist1;
-import com.marketav.jdbc.scaffold.model.id.MarketplaceWatchlist1NonEmbeddedId;
+import com.marketav.commons.implemented.id.MarketplaceWatchlist1NonEmbeddedId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
