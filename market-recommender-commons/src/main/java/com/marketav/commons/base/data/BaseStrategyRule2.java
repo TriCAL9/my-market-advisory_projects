@@ -1,5 +1,7 @@
 package com.marketav.commons.base.data;
 
+import java.math.BigDecimal;
+
 public interface BaseStrategyRule2<ID> {
     ID getRnumber();
 
@@ -9,9 +11,9 @@ public interface BaseStrategyRule2<ID> {
 
     void setTechnicalIndicator(String Technical_Indicator);
 
-    Double getTarget();
+    BigDecimal getTarget();
 
-    void setTarget(Double Target);
+    void setTarget(BigDecimal Target);
 
     String getStage();
 
