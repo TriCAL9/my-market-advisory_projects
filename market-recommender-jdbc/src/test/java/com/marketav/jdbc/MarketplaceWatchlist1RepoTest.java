@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class MarketplaceWatchlist1RepoTest extends BaseMarketplaceWatchlist1RepoTest<MarketplaceWatchlist1> {
+public class MarketplaceWatchlist1RepoTest extends BaseMarketplaceWatchlist1RepoTest<MarketplaceWatchlist1, Integer> {
     @Override
     protected MarketplaceWatchlist1 createMarketWatchlist(LocalDate transactionDate, Integer marketId, BaseMarketplaceWatchlist1.Asset assetType) {
         return MarketplaceWatchlist1.of(transactionDate, marketId, assetType);
