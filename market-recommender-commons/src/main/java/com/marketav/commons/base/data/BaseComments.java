@@ -9,7 +9,7 @@ public interface BaseComments<ID> {
 
     void setMemberId(Integer Member_Id);
 
-    ID getProfileEmail();
+    String getProfileEmail();
 
-    void setProfileEmail(ID Profile_Email);
+    void setProfileEmail(String Profile_Email);
 }
