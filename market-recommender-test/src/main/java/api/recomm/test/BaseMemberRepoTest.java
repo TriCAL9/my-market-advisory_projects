@@ -1,7 +1,11 @@
 package api.recomm.test;
 
+import com.marketav.commons.base.data.BaseComments;
 import com.marketav.commons.base.data.BaseMember;
+import com.marketav.commons.base.data.BaseRatingSubscription;
+import com.marketav.commons.base.repo.BaseCommentsRepo;
 import com.marketav.commons.base.repo.BaseMemberRepo;
+import com.marketav.commons.base.repo.BaseRatingSubscriptionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
@@ -12,16 +16,33 @@ import java.util.Optional;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-@Test(groups = {"testMemberOperation"})
-public abstract class BaseMemberRepoTest<M extends BaseMember<ID>, ID> extends AbstractTestNGSpringContextTests {
+public abstract class BaseMemberRepoTest<M extends BaseMember<ID1>, C extends BaseComments<ID2>, R extends BaseRatingSubscription<ID3>, ID1, ID2, ID3> extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    BaseMemberRepo<M, ID> memberRepo;
+    BaseMemberRepo<M, ID1> memberRepo;
+    @Autowired
+    BaseCommentsRepo<C, ID2> commentsRepo;
+    @Autowired
+    BaseRatingSubscriptionRepo<R, ID3> ratingSubscriptionRepo;
 
     protected abstract M createMember(Integer memberId, String email, Integer participant, String participantEmail,
                                       String memberFirstName);
 
-    @Test(groups = "testMemberQueries", dependsOnGroups = "testProfile")
+    protected abstract void clearData();
+
+    public BaseRatingSubscriptionRepo<R, ID3> getRatingSubscriptionRepo() {
+        return ratingSubscriptionRepo;
+    }
+
+    public BaseCommentsRepo<C, ID2> getCommentsRepo() {
+        return commentsRepo;
+    }
+
+    public BaseMemberRepo<M, ID1> getMemberRepo() {
+        return memberRepo;
+    }
+
+    @Test
     public void testOperation() {
         assertEquals(memberRepo.count(), 0);
         M firstEntity = createMember(1, "cartworld@shopping.com", null, null, "Hannah");
