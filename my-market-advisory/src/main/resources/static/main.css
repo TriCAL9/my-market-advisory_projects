@@ -14,14 +14,13 @@
 @media (min-width: 1200px) { ... }
 img.news-article-img {
             display: block;
-            width:  100px;
-            height: 50px
+            width:  auto;
+            height: 100px;
 }
 img.news-article-img-company {
             display:block;
             width: 35px;
 }
-.blank-news-article-line {
-            border-bottom: 3px inset #cf7b79;
-            width: 40%;
-}
+#news-article {
+            border-style: outset;
+            }
