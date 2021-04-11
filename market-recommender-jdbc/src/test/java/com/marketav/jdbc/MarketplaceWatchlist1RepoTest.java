@@ -15,4 +15,9 @@ public class MarketplaceWatchlist1RepoTest extends BaseMarketplaceWatchlist1Repo
     protected MarketplaceWatchlist1 createMarketWatchlist(LocalDate transactionDate, Integer marketId, BaseMarketplaceWatchlist1.Asset assetType) {
         return MarketplaceWatchlist1.of(transactionDate, marketId, assetType);
     }
+
+    @Override
+    protected void clearData() {
+        this.getMarketplaceWatchlist1Repo().deleteAll();
+    }
 }

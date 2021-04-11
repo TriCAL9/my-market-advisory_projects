@@ -12,4 +12,9 @@ public class MarketplaceWatchlist2RepoTest extends BaseMarketplaceWatchlist2Repo
     protected MarketplaceWatchlist2 createMarketplaceWatchlist2(Integer marketId, String marketPortfolioName) {
         return MarketplaceWatchlist2.of(marketId, marketPortfolioName);
     }
+
+    @Override
+    protected void clearData() {
+        this.getMarketplaceWatchlist2Repo().deleteAll();
+    }
 }

@@ -5,6 +5,7 @@ import com.marketav.commons.implemented.id.TradeNonEmbeddedId;
 import com.marketav.jdbc.scaffold.model.Trade;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.testng.annotations.BeforeMethod;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,5 +26,11 @@ public class TradeRepoTest extends BaseTradeRepoTest<Trade, TradeNonEmbeddedId> 
                                 String memberLastName) {
         return Trade.of(profileEmail, memberId, marketTransactionDate, marketId, tradePrice, tradeClosingDate, tradeType, tradeOpeningDate,
                 memberFirstName, memberLastName);
+    }
+
+    @BeforeMethod
+    @Override
+    protected void clearData() {
+        this.getBaseTradeRepo().deleteAll();
     }
 }

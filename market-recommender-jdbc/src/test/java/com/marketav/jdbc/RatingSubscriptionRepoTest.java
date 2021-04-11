@@ -12,4 +12,9 @@ public class RatingSubscriptionRepoTest extends BaseRatingSubscriptionRepoTest<R
     protected RatingSubscription createSubscription(String rating, String email, int memberId) {
         return RatingSubscription.of(rating, email, memberId);
     }
+
+    @Override
+    protected void clearRatingSubscription() {
+        this.getRatingSubscriptionRepo().deleteAll();
+    }
 }
