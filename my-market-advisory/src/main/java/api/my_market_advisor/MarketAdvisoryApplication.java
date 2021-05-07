@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"api.my_market_advisory", "api.my_market_advisory_security"})
 @EnableConfigurationProperties(IEXCloudProperties.class)
 public class MarketAdvisoryApplication {
     public static void main(String[] args) {
