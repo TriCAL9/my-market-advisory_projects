@@ -1,14 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version "2.4.0-SNAPSHOT" apply false
-}
-
-apply plugin: 'io.spring.dependency-management'
-configurations {
-    dependencyManagement {
-        imports {
-            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-        }
-    }
+    id 'org.springframework.boot'apply false
 }
 
 group = 'market-recommender'
@@ -19,7 +10,7 @@ dependencies {
     implementation 'org.springframework:spring-tx'
     implementation 'org.springframework.data:spring-data-commons'
     implementation 'org.springframework:spring-beans'
-    implementation 'org.springframework.data:spring-data-jdbc'
+    implementation 'org.springframework.data:spring-data-jdbc:'
     compileOnly 'org.projectlombok:lombok:1.18.14'
     annotationProcessor 'org.projectlombok:lombok:1.18.14'
 }

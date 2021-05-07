@@ -1,5 +1,5 @@
 plugins{
-    id 'org.springframework.boot' version "2.4.0-SNAPSHOT" apply false
+    id 'org.springframework.boot' apply false
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -7,11 +7,6 @@ apply plugin: 'io.spring.dependency-management'
 configurations.create("developmentOnly")
 
 configurations {
-    dependencyManagement {
-        imports {
-            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-        }
-    }
     developmentOnly.extendsFrom(runtimeOnly)
 }
 
