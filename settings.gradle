@@ -19,5 +19,6 @@ include 'market-recommender-commons'
 include 'market-recommender-jdbc'
 include 'market-recommender-test'
 include 'my-market-advisory'
-
+include 'my-market-adivsory-security'
+include 'my-market-advisory-security'
 
