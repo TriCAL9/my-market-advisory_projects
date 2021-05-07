@@ -1,0 +1,37 @@
+plugins {
+    id 'war'
+    id 'java'
+    id 'org.gretty' version '3.0.3'
+}
+
+version '0.1.1-SNAPSHOT'
+
+dependencies {
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation "org.springframework:spring-core:$springFrameworkVersion"
+    implementation "org.springframework:spring-context:$springFrameworkVersion"
+    implementation "org.springframework:spring-websocket:$springFrameworkVersion"
+    implementation "org.springframework:spring-webmvc:$springFrameworkVersion"
+
+    implementation  group: 'org.springframework.security',
+            name:  'spring-security-core',
+            version: "$springFrameworkVersion"
+    implementation group: 'org.springframework.security',
+            name: 'spring-security-config',
+            version: "$springFrameworkVersion"
+    implementation group: 'org.springframework.security',
+            name: 'spring-security-web',
+            version: "$springFrameworkVersion"
+
+    implementation 'org.jtwig:jtwig-web:5.87.0.RELEASE'
+    implementation 'org.jtwig:jtwig-spring:5.87.0.RELEASE'
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+
+    testImplementation "org.springframework:spring-test:5.2.6.RELEASE"
+    testImplementation "org.testng:testng:$testNgVersion"
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
+}
+
+test {
+    useTestNG()
+}
