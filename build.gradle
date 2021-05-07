@@ -1,12 +1,13 @@
 
 buildscript {
     repositories {
-        jcenter()    // Bintray's repository - a fast Maven Central mirror & more
         mavenCentral()
     }
+
     dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.4.5"
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
-        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.2.0' // If a newer version is available, use it
     }
 }
 
@@ -15,40 +16,23 @@ plugins {
 }
 
 apply plugin: 'java'
-apply plugin: 'war'                               // standard Web Archive plugin
-apply plugin: 'com.google.cloud.tools.appengine'  // App Engine tasks
 
-version = '0.1.1-SNAPSHOT'
+version = '0.1.2-SNAPSHOT'
 
 ext {
-    springFrameworkVersion = '5.3.3.RELEASE'
-    jacksonVersion = '2.0.2'
+    springFrameworkVersion = '5.1.5.RELEASE'
+    jacksonVersion = '2.12.0'
     testNgVersion = '7.0.0'
     junitPlatformVersion = '1.7.1'
 }
-
-allprojects {
-    repositories {
-        jcenter()
-        mavenLocal()
-        mavenCentral()
-
-    }
-}
-
 subprojects {
     version = '0.2.0-SNAPSHOT'
 }
 
-
 configure(subprojects.findAll { it.name == 'my-market-advisory' || 'market-recommender' }) {
     repositories {
-        mavenCentral()
         jcenter()
-
-        maven { url 'https://repo.spring.io/milestone' }
-        maven { url 'https://repo.spring.io/libs-milestone' }
-        maven { url 'https://repo.spring.io/snapshot' }
+        mavenCentral()
     }
 
     apply plugin: 'java'
@@ -74,7 +58,8 @@ configure(subprojects.findAll { it.name == 'my-market-advisory' || 'market-recom
     }
 
     dependencies {
-        compile 'com.google.appengine:appengine-api-1.0-sdk:+'  // Latest App Engine Api's
+        implementation platform('org.springframework.boot:spring-boot-dependencies:2.4.5')
+        implementation group: 'io.spring.platform', name: 'platform-bom', version: 'Cairo-SR8', ext: 'pom'
 
         testImplementation "org.testng:testng:$testNgVersion"
         testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -93,21 +78,10 @@ configure(subprojects.findAll { it.name == 'my-market-advisory' || 'market-recom
         useTestNG()
         shouldRunAfter test
     }
-
     check.dependsOn integrationTest
-// Always run unit tests
-    appengineDeploy.dependsOn test
-    appengineStage.dependsOn test
 
     reporting.baseDir = "my-reports"
     testResultsDirName = "$buildDir/my-test-results"
-
-    appengine {  // App Engine tasks configuration
-        deploy {   // deploy configuration
-            projectId = System.getenv('GOOGLE_CLOUD_PROJECT')
-            version = '1'
-        }
-    }
 
     test {
         useTestNG()
