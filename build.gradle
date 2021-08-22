@@ -60,6 +60,10 @@ configure(subprojects.findAll { it.name == 'my-market-advisory' || 'market-recom
     dependencies {
         implementation platform('org.springframework.boot:spring-boot-dependencies:2.4.5')
         implementation group: 'io.spring.platform', name: 'platform-bom', version: 'Cairo-SR8', ext: 'pom'
+        
+        // https://mvnrepository.com/artifact/com.google.appengine/gradle-appengine-plugin
+        implementation 'com.google.appengine:gradle-appengine-plugin:1.9.59'
+
 
         testImplementation "org.testng:testng:$testNgVersion"
         testImplementation "org.springframework.boot:spring-boot-starter-test"
