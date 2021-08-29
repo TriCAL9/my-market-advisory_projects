@@ -2,10 +2,8 @@ HELP.md
 .gradle
 build/
 gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+**/build/
 **/gradle.properties
-**/my-reports/
 **/src/main/resources/application.properties
 **/src/test/resources/application.properties
 **/src/integration-test/resources/application.properties
