@@ -1,6 +1,7 @@
 plugins {
     id 'war'
     id 'java'
+    id 'org.springframework.boot' apply false
     id 'org.gretty' version '3.0.3'
 }
 
@@ -12,6 +13,11 @@ dependencies {
     implementation "org.springframework:spring-context:$springFrameworkVersion"
     implementation "org.springframework:spring-websocket:$springFrameworkVersion"
     implementation "org.springframework:spring-webmvc:$springFrameworkVersion"
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.4.5'
+
+
 
     implementation  group: 'org.springframework.security',
             name:  'spring-security-core',
