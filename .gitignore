@@ -3,6 +3,7 @@ HELP.md
 build/
 gradle/wrapper/gradle-wrapper.jar
 **/build/
+**/bin/
 **/gradle.properties
 **/src/main/resources/application.properties
 **/src/test/resources/application.properties
