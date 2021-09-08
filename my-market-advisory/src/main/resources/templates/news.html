@@ -2,52 +2,64 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="text/html" charset="UTF-8" http-equiv="Content-Type" />
     <title th:each="stockProfile : ${stockProfile}" th:text="${stockProfile.getCompanyName()}"> Recent Headlines</title>
     <link rel="stylesheet" th:href="@{css/main.css}">
     <link crossorigin="anonymous" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-          rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css}">
+        rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css}">
+    <script src="@{/news.js}"></script>
 </head>
 
 <body class="container-md">
-    
-<header class="company-description justify-content-center order-1 row>
-    <h1 th:text="${stockProfile.getSymbol()}"></h1>
-    <div class="col-3">
-        <p th:text="${stockProfile.getExchange()}">Company is listed on this Exchange</p>
-    </div>
-    <div class="col-6">
-        <p th:text="${stockProfile.getDescription()}">Company's Profile</p>
-    </div>
-    <div class="col-3">
-        <p th:text="${stockProfile.getWebsite()}">Company's Website</p>
-        <img th:src="@{${logo.getUrl()}}"/>
-    </div>
-</header>
-<aside class="sticky-top">
-    <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-    The current link item
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-      <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-      <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-      <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
-    </div>
-</aside>
-<section class="justify-content-sm-center order-2">
-    <hr class="col-sm-10" id="content-separator">
-    <article class="row row-cols-2">
-        <div class="col-sm-12 col-md-6 justify-content-sm-center" id="news-article"
-             th:each="latestNews : ${latestNews}">
-            <h2 th:text="${latestNews.getSource()}">Symbol and Price</h2>
-            <a th:href="@{${latestNews.getUrl()}}">
-                <img class="news-article-img" th:src="@{${latestNews.getImage()}}" width="100px"/></a>
-            <h3 class="justify-content-sm-center justify-content-md-start" th:text="${latestNews.getHeadline()}">Wished
-                I worked here.</h3>
+    <header class="col-12 company-description justify-content-center">
+        <h1 th:text="${stockProfile.getSymbol()}"></h1>
+        <div class="col-3">
+            <p th:text="${stockProfile.getExchange()}">Company is listed on this Exchange</p>
         </div>
-    </article>
-</section>
+        <div class="col-6">
+            <p th:text="${stockProfile.getDescription()}">Company's Profile</p>
+        </div>
+        <div class="col-3">
+            <p th:text="${stockProfile.getWebsite()}">Company's Website</p>
+            <img th:src="@{${logo.getUrl()}}" />
+        </div>
+    </header>
+    <aside class="sticky-top">
+        <div role="tabpanel">
+            <!-- List group -->
+            <div class="list-group" id="myList" role="tablist">
+                <span data-bs-toggle="list"><a class="list-group-item list-group-item-action active" data-bs-toggle="collapse" data-bs-target=".show-watchlist"
+                    role="tab" aria-controls="show-watchlist">Back to top</a></span>
+
+                <span data-bs-toggle="list"><a class="show-watchlist list-group-item list-group-item-action collapse" data-bs-toggle="collapse" href="#myTab" role="tab"
+                    aria-controls="myTab">Show Watchlists</a></span>
+            </div>
+            <!-- Tab panes -->
+            <div class="tap-content collapse" id="myTab">
+                <div class="tab-pane active fade show" id="watchlist-a" role="tabpanel" aria-labelledby="watchlist-a-list">
+                    <a href="/watchlist">watchlist 1a</a></div>
+                <div class="tab-pane fade show" id="watchlist-b" role="tabpanel" aria-labelledby="watchlist-b-list">
+                    <a href="/watchlist">watchlist 2a</a></div>
+            </div>
+        </div>
+    </aside>
+    <section class="justify-content-sm-center">
+        <hr class="col-sm-10" id="content-separator">
+        <article class="row row-cols-2">
+            <div class="col-sm-12 col-md-6 justify-content-sm-center" id="news-article"
+                th:each="latestNews : ${latestNews}">
+                <h2 th:text="${latestNews.getSource()}">Symbol and Price</h2>
+                <a th:href="@{${latestNews.getUrl()}}">
+                    <img class="news-article-img" th:src="@{${latestNews.getImage()}}" width="100px" /></a>
+                <h3 class="justify-content-sm-center justify-content-md-start" th:text="${latestNews.getHeadline()}">
+                    Wished
+                    I worked here.</h3>
+            </div>
+        </article>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
