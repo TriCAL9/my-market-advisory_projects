@@ -86,17 +86,17 @@ final public class News extends MarketData {
             this.image = (Objects.requireNonNull(image));
         }
 
-        public Builder addSummary(String summary) {
+        public Builder setSummary(String summary) {
             this.summary = summary;
             return self();
         }
 
-        public Builder addDateTime(int datetime) {
+        public Builder setDateTime(int datetime) {
             this.datetime = datetime;
             return self();
         }
 
-        public Builder addHasPayWall(boolean hasPayWall) {
+        public Builder setHasPayWall(boolean hasPayWall) {
             this.hasPayWall = hasPayWall;
             return self();
         }

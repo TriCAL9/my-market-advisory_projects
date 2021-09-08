@@ -11,7 +11,7 @@ public class StockProfile extends MarketData {
     private final String exchange;
     private final String website;
 
-    private StockProfile(Builder builder) {
+    private StockProfile(final Builder builder) {
         super(builder);
         this.companyName = builder.companyName;
         this.description = builder.description;
@@ -44,8 +44,9 @@ public class StockProfile extends MarketData {
         private final String description;
         private final String exchange;
         private final String website;
-
-        public Builder(String companyName, String description, String exchange, String website) {
+        
+        public Builder(String companyName, String description, String exchange,
+                String website) {
             this.companyName = companyName;
             this.description = description;
             this.exchange = exchange;
@@ -53,13 +54,13 @@ public class StockProfile extends MarketData {
         }
 
         @Override
-        protected Builder self() {
-            return this;
+        public StockProfile build() {
+            return new StockProfile(self());
         }
 
         @Override
-        public StockProfile build() {
-            return new StockProfile(self());
+        protected Builder self() {
+            return this;
         }
     }
 
