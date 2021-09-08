@@ -21,18 +21,6 @@ public class HistoricalStockPrice extends MarketData {
             this.volume = -1;
         }
 
-        public float getClose() {
-            return this.close;
-        }
-
-        public String getDate() {
-            return this.date;
-        }
-
-        public long getVolume() {
-            return this.volume;
-        }
-
         public Builder setVolume(long volume) {
             this.volume = volume;
             return self();
