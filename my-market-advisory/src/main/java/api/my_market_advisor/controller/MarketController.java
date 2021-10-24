@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +14,7 @@ import api.my_market_advisor.model.MarketDataRequestHandler;
 import api.my_market_advisor.resource.URIHandler;
 
 @RestController
+@RequestMapping("news")
 class MarketController extends RestTemplate{
 
     @Autowired

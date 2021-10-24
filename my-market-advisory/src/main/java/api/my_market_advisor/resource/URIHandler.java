@@ -25,5 +25,6 @@ public class URIHandler {
     public URI initializeURI(final String symbol, final IEXCloudComponent iexCloudComponents) {
         return iexCloudComponents.getProperties().getLogo().expand(symbol,
                 iexCloudComponents.getProperties().getIex_cloud_key());
+
     }
 }

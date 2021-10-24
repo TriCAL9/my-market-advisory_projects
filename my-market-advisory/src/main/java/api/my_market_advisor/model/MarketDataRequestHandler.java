@@ -1,6 +1,7 @@
 package api.my_market_advisor.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -26,12 +27,15 @@ public final class MarketDataRequestHandler {
         return latestNews;
     }
 
-    public static List<HistoricalStockPrice.Builder> buildMarketData(RestTemplate restTemplate, String symbol, String range, URIHandler uriHandler, IEXCloudComponent iexCloudComponent){
+    public static List<HistoricalStockPrice> buildMarketData(RestTemplate restTemplate, String symbol, String range, URIHandler uriHandler, IEXCloudComponent iexCloudComponent){
         HistoricalStockPrice.Builder[] historicalStockPriceBuilder;
-        List <HistoricalStockPrice.Builder> listOfPricesPerStock = new ArrayList<>();
-        historicalStockPriceBuilder = restTemplate.getForObject(uriHandler.initializePricesURI(symbol, range, iexCloudComponent)
-        , HistoricalStockPrice.Builder[].class);
-        listOfPricesPerStock = List.of(historicalStockPriceBuilder);
+        List <HistoricalStockPrice> listOfPricesPerStock = new ArrayList<>();
+        historicalStockPriceBuilder = Objects.requireNonNull(restTemplate.getForObject(uriHandler.initializePricesURI(symbol, range, iexCloudComponent)
+        ,(Class<? extends HistoricalStockPrice.Builder[]>) HistoricalStockPrice.Builder[].class), "Check data structure of Json object requested.");
+       
+       for(final HistoricalStockPrice.Builder hspb : historicalStockPriceBuilder) {
+           listOfPricesPerStock.add(hspb.build());
+       }
         return listOfPricesPerStock;
     }
 
