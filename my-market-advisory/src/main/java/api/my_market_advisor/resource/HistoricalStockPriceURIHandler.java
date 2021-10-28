@@ -1,13 +1,19 @@
 package api.my_market_advisor.resource;
 
-public class HistoricalStockPriceURIHandler implements URIHandler{
+import java.net.URI;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import api.my_market_advisor.components.IEXCloudComponent;
+
+public class HistoricalStockPriceURIHandler implements URIHandler {
     private URI historicalPriceURI;
     
     @Autowired
-    IEXCloudComponent iEXCloudCompoment;
+    IEXCloudComponent iexCloudComponents;
     
     public HistoricalStockPriceURIHandler(String range, String symbol) {
-        historicalPriceURI = iEXCloudComponent.getProperties().getHistoricalUrl()
+        historicalPriceURI = iexCloudComponents.getProperties().getHistoricalUrl()
         .expand(symbol,range,iexCloudComponents.getProperties().getIex_cloud_key())
         .toURI();
     }

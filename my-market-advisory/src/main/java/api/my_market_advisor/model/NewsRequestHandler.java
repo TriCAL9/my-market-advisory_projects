@@ -1,15 +1,11 @@
 package api.my_market_advisor.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.web.client.RestTemplate;
 
-import api.my_market_advisor.components.IEXCloudComponent;
-import api.my_market_advisor.model.StockProfile.Builder;
-import api.my_market_advisor.model.StockProfile;
-import api.my_market_advisor.model.News.Builder;
-import api.my_market_advisor.model.News;
 import api.my_market_advisor.resource.CompanyURIHandler;
 import api.my_market_advisor.resource.LogoURIHandler;
 import api.my_market_advisor.resource.NewsURIHandler;
@@ -19,15 +15,16 @@ public final class NewsRequestHandler{
     private StockProfile stockProfile;
     private Logo logo;
     
-    public NewsRequestHandler(RestTemplate restTemplate, CompanyURIHandler companyURIHandler, NewsURIHandler newsURIHandler, LogoURIHandler logoURIHandler) {
+    public NewsRequestHandler(RestTemplate restTemplate, CompanyURIHandler companyURIHandler
+    , NewsURIHandler newsURIHandler, LogoURIHandler logoURIHandler) {
         stockProfile = Objects.requireNonNull(
                 restTemplate.getForObject(companyURIHandler.getURI(),
                        (Class<? extends StockProfile.Builder>) StockProfile.Builder.class),
-                "It is recommended that you check the structure of the Json object before continuing.");
+                "It is recommended that you check the structure of the Json object before continuing.").build();
 
         
         logo = Objects.requireNonNull(
-             restTemplate.getForObject(logoURIHandler, Logo.class),
+             restTemplate.getForObject(logoURIHandler.getURI(), Logo.class),
              "Logo not found");
         
         final News.Builder[] builders = Objects.requireNonNull(

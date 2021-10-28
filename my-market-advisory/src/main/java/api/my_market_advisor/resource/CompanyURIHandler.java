@@ -1,15 +1,22 @@
 package api.my_market_advisor.resource;
 
-public class CompanyURIHandler implements URIHandler{
+import java.net.URI;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import api.my_market_advisor.components.IEXCloudComponent;
+import api.my_market_advisor.model.StockProfile;
+
+public class CompanyURIHandler implements URIHandler {
     
     private URI companyURI;
     
-    @Autowire
-    private IEXCloudComponents iexCloudComponents
+    @Autowired
+    private IEXCloudComponent iexCloudComponents;
 
     public CompanyURIHandler(String symbol) {
-        companyURI = iexCloudComponents.getIexCloudProperties.getCompanyUrl()
-        .expand(symbol,StockProfile.PARAMETER,iexCloudProperties().getIex_cloud_key())
+        companyURI = iexCloudComponents.getProperties().getCompanyUrl()
+        .expand(symbol,StockProfile.getPARAMETER(), iexCloudComponents.getProperties().getIex_cloud_key())
         .toURI();
     }
     
