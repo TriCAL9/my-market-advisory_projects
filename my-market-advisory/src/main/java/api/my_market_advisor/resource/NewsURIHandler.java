@@ -1,6 +1,7 @@
 package api.my_market_advisor.resource;
 
 import java.net.URI;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,9 +15,9 @@ public class NewsURIHandler {
     IEXCloudProperties iexCloudProperties;
     
     public NewsURIHandler(int last, String symbol){
-        newsURI = URI.create(iexCloudProperties.getUrl()
+        newsURI = Objects.requireNonNull(URI.create(iexCloudProperties.getUrl()
         .expand(symbol, News.getPARAMETER(), iexCloudProperties.getLast()
-            .expand(last),iexCloudProperties.getIex_cloud_key()).toString());
+            .expand(last),iexCloudProperties.getIex_cloud_key()).toString()),"Attempt to fix null issue");
     }
     
     public URI getURI() {
