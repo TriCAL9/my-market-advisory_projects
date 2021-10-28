@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import api.my_market_advisor.components.IEXCloudComponent;
-import api.my_market_advisor.model.MarketDataRequestHandler;
-import api.my_market_advisor.resource.URIHandler;
+import api.my_market_advisor.resource.*;
 
 @RestController
 @RequestMapping("news")
@@ -20,20 +18,18 @@ class MarketController extends RestTemplate{
     @Autowired
     private RestTemplateBuilder builder;
 
-    @Autowired
-    private IEXCloudComponent iexCloudComponent;
-
-    private URIHandler uriHandler;
-
     @GetMapping(value = "{symbol}/{last}")
     public ModelAndView feedNews(@PathVariable(name = "symbol") final String symbol,
             @PathVariable(name = "last") final String last) {
         final var news = new ModelAndView("news");
         final var size = Integer.parseInt(last);
-        uriHandler = new URIHandler();
-        news.addObject("stockProfile", MarketDataRequestHandler.buildMarketData(restTemplate(builder), symbol, uriHandler, iexCloudComponent));
-        news.addObject("latestNews", MarketDataRequestHandler.buildMarketData(restTemplate(builder), symbol, size, uriHandler, iexCloudComponent));
-        news.addObject("logo", MarketDataRequestHandler.getLogo(restTemplate(builder), symbol, uriHandler, iexCloudComponent));
+        CompanyURIHandler companyURI = new CompanyURIHandler(symbol);
+        NewsURIHandler newsURI = new NewsURIHandler(symbol, size);
+        LogoURIHandler logoURI = new  LogoURIHandler(symbol);
+        NewsRequestHandler newsRequestHandler = new NewsRequestHandler(restTemplate(builder), companyURI, newURI, logoURI);
+        news.addObject("stockProfile",newsRequestHandler.getStockProfile());
+        news.addObject("latestNews", newsRequestHandler.getNews());
+        news.addObject("logo", newsRequestHandler.getLogo());
         return news;
     }
 
