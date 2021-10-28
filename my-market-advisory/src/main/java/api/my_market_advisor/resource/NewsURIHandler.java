@@ -11,13 +11,12 @@ public class NewsURIHandler {
     private URI newsURI;
 
     @Autowired
-    IEXCloudComponent iexCloudComponents;
+    IEXCloudProperties iexCloudProperties;
     
     public NewsURIHandler(int last, String symbol){
-        newsURI =iexCloudComponents.getProperties().getUrl()
-        .expand(symbol, News.getPARAMETER(), iexCloudComponents.getProperties().getLast()
-            .expand(last),iexCloudComponents.getProperties().getIex_cloud_key())
-        .toURI();
+        newsURI = URI.create(iexCloudProperties.getUrl()
+        .expand(symbol, News.getPARAMETER(), iexCloudProperties.getLast()
+            .expand(last),iexCloudProperties.getIex_cloud_key()).toString());
     }
     
     public URI getURI() {

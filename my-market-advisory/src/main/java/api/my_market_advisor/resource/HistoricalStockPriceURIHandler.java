@@ -4,18 +4,15 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import api.my_market_advisor.components.IEXCloudComponent;
-
 public class HistoricalStockPriceURIHandler implements URIHandler {
     private URI historicalPriceURI;
     
     @Autowired
-    IEXCloudComponent iexCloudComponents;
+    IEXCloudProperties iexCloudProperties;
     
     public HistoricalStockPriceURIHandler(String range, String symbol) {
-        historicalPriceURI = iexCloudComponents.getProperties().getHistoricalUrl()
-        .expand(symbol,range,iexCloudComponents.getProperties().getIex_cloud_key())
-        .toURI();
+        historicalPriceURI = URI.create(iexCloudProperties.getHistoricalUrl()
+        .expand(symbol,range,iexCloudProperties.getIex_cloud_key()).toString());
     }
     
     public URI getURI() {

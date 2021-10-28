@@ -4,7 +4,6 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import api.my_market_advisor.components.IEXCloudComponent;
 import api.my_market_advisor.model.StockProfile;
 
 public class CompanyURIHandler implements URIHandler {
@@ -12,12 +11,11 @@ public class CompanyURIHandler implements URIHandler {
     private URI companyURI;
     
     @Autowired
-    private IEXCloudComponent iexCloudComponents;
+    private IEXCloudProperties iexCloudProperties;
 
     public CompanyURIHandler(String symbol) {
-        companyURI = iexCloudComponents.getProperties().getCompanyUrl()
-        .expand(symbol,StockProfile.getPARAMETER(), iexCloudComponents.getProperties().getIex_cloud_key())
-        .toURI();
+        companyURI = URI.create(iexCloudProperties.getCompanyUrl()
+        .expand(symbol,StockProfile.getPARAMETER(), iexCloudProperties.getIex_cloud_key()).toString());
     }
     
     public URI getURI() {
