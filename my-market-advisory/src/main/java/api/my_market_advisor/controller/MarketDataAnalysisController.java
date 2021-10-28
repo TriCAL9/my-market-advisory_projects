@@ -1,6 +1,5 @@
 package api.my_market_advisor.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import api.my_market_advisor.components.IEXCloudComponent;
 import api.my_market_advisor.model.HistoricalStockPrice;
-import api.my_market_advisor.model.MarketDataRequestHandler;
-import api.my_market_advisor.resource.URIHandler;
+import api.my_market_advisor.model.HistoricalStockPriceRequestHandler;
+import api.my_market_advisor.resource.HistoricalStockPriceURIHandler;
 
 @RequestMapping("/watchlist")
 @RestController
@@ -27,19 +25,16 @@ public class MarketDataAnalysisController extends RestTemplate {
     @Autowired
     private RestTemplateBuilder builder;
 
-    private URIHandler uriHandler;
-
-    private IEXCloudComponent iexCloudComponent;
 
     @GetMapping(value = "/adds", params = {"symbol", "id", "range"}, produces =  "text/html")
-    public ResponseEntity<String>addsToWatchlist(@RequestParam String symbol, @RequestParam String id, @RequestParam String range) {
-        List <HistoricalStockPrice> symbolData = new ArrayList<>();
-        symbolData = MarketDataRequestHandler.buildMarketData(restTemplate(builder), symbol, range, uriHandler, iexCloudComponent);
+    public ResponseEntity<List<HistoricalStockPrice>>addsToWatchlist(@RequestParam String symbol, @RequestParam String id, @RequestParam String range) {
+        
         //URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
         //.path("{symbol}/watchlist/{id}")
       //  .buildAndExpand(symbol, id)
         //.toUri();
-        ResponseEntity<String> resultingEntity = ResponseEntity.ok().body(symbolData.get(Integer.parseInt(id)).getDate());
+        List<HistoricalStockPrice> historicalStockPrice = new HistoricalStockPriceRequestHandler( new HistoricalStockPriceURIHandler( range, symbol), restTemplate(builder)).getHistoricalStockPrice();
+        ResponseEntity<List<HistoricalStockPrice>> resultingEntity =  ResponseEntity.ok().body(historicalStockPrice);
         return resultingEntity;
     }
     
