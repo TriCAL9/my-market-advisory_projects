@@ -6,7 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import api.my_market_advisor.model.StockProfile;
-
+@Component
 public class CompanyURIHandler implements URIHandler {
     
     private URI companyURI;

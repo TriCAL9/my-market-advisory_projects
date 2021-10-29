@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+@Component
 public class HistoricalStockPriceURIHandler implements URIHandler {
     private URI historicalPriceURI;
     

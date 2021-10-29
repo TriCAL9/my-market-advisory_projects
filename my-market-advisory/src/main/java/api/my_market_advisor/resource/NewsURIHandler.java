@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import api.my_market_advisor.components.IEXCloudComponent;
 import api.my_market_advisor.model.News;
-
+@Component
 public class NewsURIHandler {
     private URI newsURI;
 
