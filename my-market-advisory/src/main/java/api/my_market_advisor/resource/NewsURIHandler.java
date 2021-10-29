@@ -13,7 +13,7 @@ public class NewsURIHandler {
 
     @Autowired
     IEXCloudProperties iexCloudProperties;
-    
+    @Autowired
     public NewsURIHandler(int last, String symbol){
         newsURI = Objects.requireNonNull(URI.create(iexCloudProperties.getUrl()
         .expand(symbol, News.getPARAMETER(), iexCloudProperties.getLast()

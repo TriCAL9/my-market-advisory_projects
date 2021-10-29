@@ -13,7 +13,8 @@ public class CompanyURIHandler implements URIHandler {
     
     @Autowired
     private IEXCloudProperties iexCloudProperties;
-
+    
+    @Autowired
     public CompanyURIHandler(String symbol) {
         companyURI = Objects.requireNonNull(URI.create(iexCloudProperties.getCompanyUrl()
         .expand(symbol,StockProfile.getPARAMETER(), iexCloudProperties.getIex_cloud_key()).toString()), "Attempt to fix null issue");

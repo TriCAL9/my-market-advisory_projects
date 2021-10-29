@@ -9,6 +9,8 @@ public class LogoURIHandler implements URIHandler {
     private URI logoURI;
     @Autowired
     IEXCloudProperties iexCloudProperties;
+    
+    @Autowired
     public LogoURIHandler(String symbol) {
         logoURI = Objects.requireNonNull(URI.create(iexCloudProperties.getLogo()
             .expand(symbol, iexCloudProperties.getIex_cloud_key()).toString()));
