@@ -46,6 +46,7 @@ class TestMarketController extends AbstractTestNGSpringContextTests {
         this.mockMVC = MockMvcBuilders.webAppContextSetup(this.wac).build();
         MockHttpServletResponse response = this.mockMVC.perform(get("https://localhost:"
                 + "8080" + "/"
+                + "news" + "/"
                 + symbol + "/"
                 + last)
                 .accept(MediaType.ALL)).andReturn().getResponse();

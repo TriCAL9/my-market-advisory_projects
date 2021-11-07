@@ -1,20 +1,19 @@
 package api.my_market_advisor.components;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import api.my_market_advisor.resource.IEXCloudProperties;
 
-@Component
+@Configuration
+@ComponentScan("api.my_market_advisor")
 public class IEXCloudComponent {
-    private final IEXCloudProperties properties;
-
     @Autowired
-    public IEXCloudComponent(IEXCloudProperties properties) {
-        this.properties = properties;
-    }
-
-    public IEXCloudProperties getProperties() {
-        return properties;
+    private IEXCloudProperties iexCloudProperties;
+   
+    public IEXCloudProperties getIexCloudProperties() {
+        return iexCloudProperties;
     }
 }

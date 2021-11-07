@@ -33,7 +33,7 @@ public class MarketDataAnalysisController extends RestTemplate {
         //.path("{symbol}/watchlist/{id}")
       //  .buildAndExpand(symbol, id)
         //.toUri();
-        List<HistoricalStockPrice> historicalStockPrice = new HistoricalStockPriceRequestHandler( new HistoricalStockPriceURIHandler( range, symbol), restTemplate(builder)).getHistoricalStockPrice();
+        List<HistoricalStockPrice> historicalStockPrice = new HistoricalStockPriceRequestHandler( new HistoricalStockPriceURIHandler(symbol, range), restTemplate(builder)).getHistoricalStockPrice();
         ResponseEntity<List<HistoricalStockPrice>> resultingEntity =  ResponseEntity.ok().body(historicalStockPrice);
         return resultingEntity;
     }
