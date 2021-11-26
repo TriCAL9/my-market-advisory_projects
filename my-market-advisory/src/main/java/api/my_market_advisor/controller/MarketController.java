@@ -24,15 +24,8 @@ class MarketController extends RestTemplate{
     public ModelAndView feedNews(@PathVariable(name = "symbol") final String symbol,
             @PathVariable(name = "last") final String last) {
         final var news = new ModelAndView("news");
-        CompanyURIHandler companyURIHandler = new CompanyURIHandler(symbol);
-        LogoURIHandler logoURIHandler = new LogoURIHandler(symbol);
-        NewsURIHandler newsURIHandler = new NewsURIHandler(last, symbol);
-      /*
-        news.addObject("stockProfile",newsRequestHandler.getStockProfile());
-        news.addObject("latestNews", newsRequestHandler.getNews());
-        news.addObject("logo", newsRequestHandler.getLogo());
-       
-       */
+        
+        
         return news;      
     }
 
